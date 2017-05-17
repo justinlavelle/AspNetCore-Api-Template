@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace HC.Template.Domain.Models.Config
+{
+
+    /* 
+       When values aren't provided, they get their default values, (e.g. MySettings.Dict["SecondKey].IsEnabled == true). Dictionaries, lists and enums are all bound correctly. 
+       PLEASE bear the following in mind when creating these properties from out of the appsettings.json:
+
+        * Properties must have a public Set method...
+        * Dictionaries must have string keys
+        * Don't expose IDictionary
+        * 
+    */
+
+    public class AppSettings
+    {
+        public string ApplicationTitle { get; set; }
+        public string StringSetting { get; set; }
+        public int IntSetting { get; set; }
+        public Dictionary<string, InnerClass> Dict { get; set; } // Dictionaries must have string keys
+        public List<string> ListOfValues { get; set; }
+        public MyEnum AnEnum { get; set; }
+
+    }
+
+    public class InnerClass
+    {
+        public string Name { get; set; }
+        public bool IsEnabled { get; set; } = true;
+    }
+
+    public enum MyEnum
+    {
+        None = 0,
+        Lots = 1
+    }
+
+}
