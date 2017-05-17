@@ -116,6 +116,6 @@ Nothing's ever perfect, but please let me know by creating an issue (make sure t
 
 Copyright (c) 2017-2018 [Atish Bhana](https://github.com/Magitekwarrior)
 
-Twitter: [@Magitekwarrior](http://twitter.com/Magitekwarrior) | Medium: [@MarkPieszak](https://medium.com/@MarkPieszak)
+Twitter: [@Magitekwarrior](http://twitter.com/Magitekwarrior)
 
 ----
