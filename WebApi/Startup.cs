@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HC.Template.Infrastructure.ConfigModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.AspNetCore.Swagger;
-using HC.Template.Domain.Models.Config;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace WebApi
 {
@@ -56,14 +52,17 @@ namespace WebApi
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.Configure<ConfigSettings>(Configuration.GetSection("ConfigSettings"));
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+            services.Configure<ExternalServices>(Configuration.GetSection("ExternalServices"));
 
             services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<AppSettings>>().Value);
             services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<ConfigSettings>>().Value);
             services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<ConnectionStrings>>().Value);
+            services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<ExternalServices>>().Value);
 
             // *If* you need access to generic IConfiguration this is **required**
             services.AddSingleton(Configuration);   // IConfigurationRoot
             services.AddSingleton<IConfiguration>(Configuration);   // IConfiguration explicitly
+
             // **** appsettings.json END **********************************************************************
 
         }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HC.Template.Domain.Models.Config
+namespace HC.Template.Infrastructure.ConfigModels
 {
     public class ConnectionStrings
     {
         public string Conn1 { get; set; }
-        public string Conn2 { get; set; }
+        public int Timeout { get; set; }
     }
 }

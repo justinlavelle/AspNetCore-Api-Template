@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HC.Template.Domain.Models.Config
+namespace HC.Template.Infrastructure.ConfigModels
 {
 
     /* 
