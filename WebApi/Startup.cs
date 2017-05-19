@@ -1,4 +1,6 @@
 ﻿using HC.Template.Infrastructure.ConfigModels;
+using HC.Template.Interface.Contracts;
+using HC.Template.InternalServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +18,7 @@ namespace WebApi
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
             if (env.IsDevelopment())
@@ -62,6 +64,9 @@ namespace WebApi
             // *If* you need access to generic IConfiguration this is **required**
             services.AddSingleton(Configuration);   // IConfigurationRoot
             services.AddSingleton<IConfiguration>(Configuration);   // IConfiguration explicitly
+
+            services.AddTransient<IConfigService, ConfigService>();
+            services.AddTransient<IExampleService, ExampleService>();
 
             // **** appsettings.json END **********************************************************************
 

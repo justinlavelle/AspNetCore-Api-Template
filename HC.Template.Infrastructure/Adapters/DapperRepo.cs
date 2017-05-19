@@ -119,5 +119,24 @@ namespace HC.Template.Infrastructure.Adapters
 
             return returnOutputParameter;
         }
+
+        public static async Task<IEnumerable<T>> ExecuteDynamicSql<T>(
+                string sql,
+                string dbconnectionString = null,
+                IDbConnection dbconnection = null,
+                int? sqltimeout = null,
+                IDbTransaction dbtransaction = null)
+        {
+            using (var connection = OpenDBConnection(dbconnectionString, dbconnection))
+            {
+                return await connection.QueryAsync<T>
+                (
+                    sql: sql,
+                    commandType: CommandType.Text,
+                    transaction: dbtransaction,
+                    commandTimeout: GetSqlTimeOut(sqltimeout)
+                ).ConfigureAwait(false);
+            }
+        }
     }
 }

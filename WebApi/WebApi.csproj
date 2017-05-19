@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
@@ -35,6 +36,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HC.Template.Domain\HC.Template.Domain.csproj" />
     <ProjectReference Include="..\HC.Template.Infrastructure\HC.Template.Infrastructure.csproj" />
+    <ProjectReference Include="..\HC.Template\HC.Template.csproj" />
   </ItemGroup>
 
 </Project>

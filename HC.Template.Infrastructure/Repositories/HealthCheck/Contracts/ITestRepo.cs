@@ -1,12 +1,14 @@
-﻿using System;
+﻿using HC.Template.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace HC.Template.Infrastructure.Repositories.HealthCheck.Contracts
 {
     public interface ITestRepo
     {
-        bool GetDbRecord();
+        Task<IEnumerable<TestObj>> GetTestRecord();
     }
 
 }

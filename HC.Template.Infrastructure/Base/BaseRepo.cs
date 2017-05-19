@@ -9,7 +9,7 @@ namespace HC.Template.Infrastructure.Base
 {
     public class BaseRepo
     {
-        //private IConfiguration config;
+        private IConfiguration config;
         private ConnectionStrings connectionStrings;
 
         public BaseRepo(ConnectionStrings conSettings)

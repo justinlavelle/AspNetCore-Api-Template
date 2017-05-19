@@ -18,7 +18,7 @@ namespace HC.Template.Domain.Models
         /// Tells if the service is available
         /// </summary>
         /// <returns>True if the service is available</returns>
-        public bool Available { get; }
+        public bool Available { get; set; }
     }
 
 }
