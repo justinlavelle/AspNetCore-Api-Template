@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using HC.Template.Interface.Contracts;
+using HC.Template.Interface.ServiceModels;
 
 namespace WebApi.Controllers
 {
@@ -13,18 +14,30 @@ namespace WebApi.Controllers
     public class ExampleController : Controller
     {
         private IExampleService _exampleService;
-        public ExampleController(IExampleService exampleService)
+        private ITestService _testService;
+
+        public ExampleController(IExampleService exampleService, ITestService testService)
         {
             _exampleService = exampleService;
+            _testService = testService;
         }
 
         [HttpPost]
         [Route("CallConfig")]
-        public async Task<string> SaveLeadCallBack()
+        public async Task<string> GetAppSettingsFromConfig()
         { 
             var response = _exampleService.GetExampleString();
             return response;
         }
+
+        [HttpPost]
+        [Route("CallDB")]
+        public async Task<TestResponse> GetTestRecord()
+        {
+            var response = await _testService.GetTestRecordFromDB();
+            return response;
+        }
+        
 
     }
 }

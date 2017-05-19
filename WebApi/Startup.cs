@@ -1,6 +1,8 @@
 ﻿using HC.Template.Infrastructure.ConfigModels;
+using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
+using HC.Template.Infrastructure.Repositories.HealthCheck.Repo;
 using HC.Template.Interface.Contracts;
-using HC.Template.InternalServices;
+using HC.Template.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -62,11 +64,13 @@ namespace WebApi
             services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<ExternalServices>>().Value);
 
             // *If* you need access to generic IConfiguration this is **required**
-            services.AddSingleton(Configuration);   // IConfigurationRoot
+            //services.AddSingleton(Configuration);   // IConfigurationRoot
             services.AddSingleton<IConfiguration>(Configuration);   // IConfiguration explicitly
 
             services.AddTransient<IConfigService, ConfigService>();
             services.AddTransient<IExampleService, ExampleService>();
+            services.AddTransient<ITestService, TestService>();
+            services.AddTransient<ITestRepo, TestRepo>();
 
             // **** appsettings.json END **********************************************************************
 

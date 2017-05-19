@@ -4,7 +4,7 @@ using HC.Template.Interface.ServiceModels;
 using System.Threading.Tasks;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
 
-namespace HC.Template
+namespace HC.Template.Service
 {
     public class TestService : ITestService
     {

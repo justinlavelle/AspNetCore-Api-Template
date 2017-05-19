@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="Factories\" />
     <Folder Include="Core\" />
+    <Folder Include="InternalServices\" />
     <Folder Include="Mappers\" />
   </ItemGroup>
 

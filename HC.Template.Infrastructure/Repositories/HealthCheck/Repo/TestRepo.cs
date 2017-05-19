@@ -14,6 +14,7 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
     public class TestRepo: BaseRepo, ITestRepo
     {
         private readonly ConnectionStrings _connectionSettings;
+        private AppSettings _appSettings;
         public TestRepo (ConnectionStrings connString) : base(connString)
         {
             _connectionSettings = connString;
