@@ -1,4 +1,5 @@
-﻿using HC.Template.Infrastructure.ConfigModels;
+﻿using AutoMapper;
+using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Repo;
 using HC.Template.Interface.Contracts;
@@ -41,7 +42,11 @@ namespace WebApi
             // Add framework services.
             services.AddMvc();
 
+            // Add Automapper library for mapping poco objects
+            services.AddAutoMapper();
+
             // Add SwaggerUI to the API
+            var pathToDoc = Configuration["Swagger:FileName"];
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Web API", Version = "v1" });
@@ -52,7 +57,7 @@ namespace WebApi
             // Add functionality to inject IOptions<T>
             services.AddOptions();
 
-            // Add our Config object(s) so it can be injected
+            // Add our Config object(s) so it can be injected [Dependency Injection]
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.Configure<ConfigSettings>(Configuration.GetSection("ConfigSettings"));
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
@@ -64,9 +69,10 @@ namespace WebApi
             services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<ExternalServices>>().Value);
 
             // *If* you need access to generic IConfiguration this is **required**
-            //services.AddSingleton(Configuration);   // IConfigurationRoot
+            services.AddSingleton(Configuration);   // IConfigurationRoot
             services.AddSingleton<IConfiguration>(Configuration);   // IConfiguration explicitly
 
+            // Dependency injection for our repos and services [i.e. Data Layer to Core/logic Layer]
             services.AddTransient<IConfigService, ConfigService>();
             services.AddTransient<IExampleService, ExampleService>();
             services.AddTransient<ITestService, TestService>();

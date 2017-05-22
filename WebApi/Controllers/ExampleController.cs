@@ -24,15 +24,15 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("CallConfig")]
-        public async Task<string> GetAppSettingsFromConfig()
+        public async Task<ExampleResponse> GetAppSettingsFromConfig()
         { 
-            var response = _exampleService.GetExampleString();
+            var response = _exampleService.GetExampleString().Result;
             return response;
         }
 
         [HttpPost]
         [Route("CallDB")]
-        public async Task<TestResponse> GetTestRecord()
+        public async Task<TestObjResponse> GetTestRecord()
         {
             var response = await _testService.GetTestRecordFromDB();
             return response;

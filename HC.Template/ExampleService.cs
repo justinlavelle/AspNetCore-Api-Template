@@ -3,25 +3,31 @@ using HC.Template.Interface.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HC.Template.Interface.ServiceModels;
+using System.Threading.Tasks;
+using AutoMapper;
 
 namespace HC.Template.Service
 {
     public class ExampleService : IExampleService
     {
-        IConfigService _configService;
-        protected AppSettings _appSettings { get; }
+        AppSettings _appSettings;
+        IMapper _mapper;
 
-        public ExampleService(IConfigService configService, AppSettings appSettings)
+        public ExampleService(AppSettings appSettings, IMapper mapper)
         {
-            _configService = configService;
             _appSettings = appSettings;
+            _mapper = mapper;
         }
-        public string GetExampleString()
+
+        public async Task<ExampleResponse> GetExampleString()
         {
-            var response = _appSettings.ApplicationTitle; //_configService.GetAppSettings();
+            var response = _appSettings; //_configService.GetAppSettings();
             _appSettings.ApplicationTitle = "Hello Kitty";
 
-            return response;
+            var result = _mapper.Map<AppSettings, ExampleResponse>(response); // Mapping Domain to ServiceModel
+            return result;
         }
+
     }
 }

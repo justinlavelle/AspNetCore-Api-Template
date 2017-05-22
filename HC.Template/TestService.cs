@@ -15,7 +15,7 @@ namespace HC.Template.Service
             _testRepo = testRepo;
         }
 
-        public async Task<TestResponse> GetTestRecordFromDB()
+        public async Task<TestObjResponse> GetTestRecordFromDB()
         {
             var response = await _testRepo.GetTestRecord();
             throw new NotImplementedException();

@@ -8,6 +8,6 @@ namespace HC.Template.Interface.Contracts
 {
     public interface ITestService
     {
-        Task<TestResponse> GetTestRecordFromDB();
+        Task<TestObjResponse> GetTestRecordFromDB();
     }
 }
