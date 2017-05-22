@@ -9,7 +9,7 @@
     - [ ] Create Test method to read AppSettings from appsettings.json in service layer
 
 - [x] Swashbuckle/swagger test method implementation page
-    - [ ] Create Comments for methods + Auto Documentation (xml)
+    - [x] Create Comments for methods + Auto Documentation (xml)
 - [ ] Logging [GrayLogging or intel .net core logging
   
 - [ ] Implement (Moq ?) Unit Test Framework
