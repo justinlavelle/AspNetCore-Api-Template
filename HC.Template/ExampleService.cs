@@ -5,16 +5,16 @@ using System.Collections.Generic;
 using System.Text;
 using HC.Template.Interface.ServiceModels;
 using System.Threading.Tasks;
-using HC.Template.Mappers;
+using AutoMapper;
 
 namespace HC.Template.Service
 {
     public class ExampleService : IExampleService
     {
         AppSettings _appSettings;
-        private ExampleServiceMapper _mapper;
+        IMapper _mapper;
 
-        public ExampleService(AppSettings appSettings, ExampleServiceMapper mapper)
+        public ExampleService(AppSettings appSettings, IMapper mapper)
         {
             _appSettings = appSettings;
             _mapper = mapper;
@@ -23,10 +23,9 @@ namespace HC.Template.Service
         public async Task<ExampleResponse> GetExampleString()
         {
             var response = _appSettings; //_configService.GetAppSettings();
-            //_appSettings.ApplicationTitle = "Hello Kitty";
+            _appSettings.ApplicationTitle = "Hello Kitty";
 
-            var result = _mapper.MapGetExampleString(response); //_mapper.Map<AppSettings, ExampleResponse>(response); // Mapping Domain to ServiceModel
-            
+            var result = _mapper.Map<AppSettings, ExampleResponse>(response); // Mapping Domain to ServiceModel
             return result;
         }
 
