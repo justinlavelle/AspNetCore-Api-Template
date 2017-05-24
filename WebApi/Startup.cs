@@ -3,6 +3,8 @@ using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Repo;
 using HC.Template.Interface.Contracts;
+using HC.Template.InternalServices.Mappers.Contracts;
+using HC.Template.Mappers;
 using HC.Template.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -77,6 +79,9 @@ namespace WebApi
             services.AddTransient<IExampleService, ExampleService>();
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<ITestRepo, TestRepo>();
+
+            services.AddTransient<IExampleServiceMapper, ExampleServiceMapper>();
+            services.AddTransient<ITestServiceMapper, TestServiceMapper>();
 
             // **** appsettings.json END **********************************************************************
 

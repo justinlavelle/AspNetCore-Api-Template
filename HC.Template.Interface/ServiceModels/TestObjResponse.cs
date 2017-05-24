@@ -6,9 +6,15 @@ namespace HC.Template.Interface.ServiceModels
 {
     public class TestObjResponse
     {
-        public string Field1 { get; set; }
-        public string Field2 { get; set; }
+        public IEnumerable<TestObjRecord> TestRecords;
         //public string Field3 { get; set; }
         //public string Field4 { get; set; }
+    }
+
+    public class TestObjRecord
+    {
+        public string Field1 { get; set; }
+        public string Field2 { get; set; }
+
     }
 }
