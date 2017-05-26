@@ -15,7 +15,7 @@ namespace HC.Template.InternalServices.Mappers
                 {
                     ApplicationTitle = appSettings.ApplicationTitle,
                     Dict = new System.Collections.Generic.Dictionary<string, InnerClassVals>(),
-                    EnumSwitchVal = appSettings.AnEnumSwitch.ToString(),
+                    EnumSwitchVal = appSettings.AnEnumSwitch
                     IntSetting = appSettings.IntSetting,
                     ListOfValues = appSettings.ListOfValues,
                     StringSetting = appSettings.StringSetting

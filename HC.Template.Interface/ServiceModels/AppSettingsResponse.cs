@@ -26,4 +26,10 @@ namespace HC.Template.Interface.ServiceModels
         public bool IsEnabled { get; set; } = true;
     }
 
+    public enum EnumSwitch
+    {
+        On = 0,
+        Off = 1
+    }
+
 }

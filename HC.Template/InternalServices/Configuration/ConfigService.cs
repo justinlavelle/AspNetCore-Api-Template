@@ -28,6 +28,8 @@ namespace HC.Template.InternalServices.Configuration
             return result;
         }
 
+
+
         public ConfigSettingsResponse GetConfigSettings()
         {
             var response = _configSettings;//_config.GetSection("ConfigSettings") as ConfigSettings;
