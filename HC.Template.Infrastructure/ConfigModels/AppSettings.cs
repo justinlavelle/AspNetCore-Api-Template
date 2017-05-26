@@ -22,7 +22,7 @@ namespace HC.Template.Infrastructure.ConfigModels
         public int IntSetting { get; set; }
         public Dictionary<string, InnerClass> Dict { get; set; } // Dictionaries must have string keys
         public List<string> ListOfValues { get; set; }
-        public MyEnum AnEnum { get; set; }
+        public MyEnum AnEnumSwitch { get; set; }
 
     }
 
@@ -34,8 +34,8 @@ namespace HC.Template.Infrastructure.ConfigModels
 
     public enum MyEnum
     {
-        None = 0,
-        Lots = 1
+        On = 0,
+        Off = 1
     }
 
 }

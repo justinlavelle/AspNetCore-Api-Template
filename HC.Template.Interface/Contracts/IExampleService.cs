@@ -8,6 +8,7 @@ namespace HC.Template.Interface.Contracts
 {
     public interface IExampleService
     {
-        Task<ExampleResponse> GetExampleString();
+        ExampleResponse GetApplicationTitle();
+        AppSettingsResponse GetApplicationSettings();
     }
 }

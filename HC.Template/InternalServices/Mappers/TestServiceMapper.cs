@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HC.Template.Domain.Models;
+﻿using HC.Template.Domain.Models;
 using HC.Template.Interface.ServiceModels;
 using HC.Template.InternalServices.Mappers.Contracts;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace HC.Template.Mappers
+namespace HC.Template.InternalServices.Mappers
 {
     public class TestServiceMapper: ITestServiceMapper
     {

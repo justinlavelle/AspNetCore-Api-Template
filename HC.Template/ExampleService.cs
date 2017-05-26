@@ -1,34 +1,36 @@
-﻿using HC.Template.Infrastructure.ConfigModels;
-using HC.Template.Interface.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels;
-using System.Threading.Tasks;
-using HC.Template.Mappers;
+using HC.Template.InternalServices.Configuration.Contracts;
 using HC.Template.InternalServices.Mappers.Contracts;
+using System.Threading.Tasks;
 
 namespace HC.Template.Service
 {
     public class ExampleService : IExampleService
     {
-        AppSettings _appSettings;
+        //AppSettings _appSettings;
+        private IConfigService _config;
         private IExampleServiceMapper _mapper;
 
-        public ExampleService(AppSettings appSettings, IExampleServiceMapper mapper)
+        public ExampleService(IConfigService config, IExampleServiceMapper mapper)
         {
-            _appSettings = appSettings;
+            _config = config;
             _mapper = mapper;
         }
 
-        public async Task<ExampleResponse> GetExampleString()
+        public ExampleResponse GetApplicationTitle()
         {
-            var response = _appSettings; //_configService.GetAppSettings();
-            //_appSettings.ApplicationTitle = "Hello Kitty";
-
-            var result = _mapper.MapGetExampleString(response); //_mapper.Map<AppSettings, ExampleResponse>(response); // Mapping Domain to ServiceModel
+            var response = _config.GetAppSettings();
+            var result = _mapper.MapAppSettingsToExample(response);
             
             return result;
+        }
+
+        public AppSettingsResponse GetApplicationSettings()
+        {
+            var response = _config.GetAppSettings();
+
+            return response;
         }
 
     }

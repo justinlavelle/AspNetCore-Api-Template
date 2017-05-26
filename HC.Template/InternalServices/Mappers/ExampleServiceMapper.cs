@@ -1,21 +1,15 @@
-﻿using HC.Template.Domain.Models;
-using HC.Template.Interface.ServiceModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HC.Template.Infrastructure.ConfigModels;
+﻿using HC.Template.Interface.ServiceModels;
 using HC.Template.InternalServices.Mappers.Contracts;
 
-namespace HC.Template.Mappers
+namespace HC.Template.InternalServices.Mappers
 {
     public class ExampleServiceMapper : IExampleServiceMapper
     {
-        public ExampleResponse  MapGetExampleString(AppSettings appSettings)
+        public ExampleResponse MapAppSettingsToExample(AppSettingsResponse appSettings)
         {
             var response = new ExampleResponse()
             {
-                ApplicationTitle = appSettings.ApplicationTitle
+                ApplicationTitle = appSettings.AppSettingVals.ApplicationTitle
             };
 
             return response;

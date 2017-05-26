@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HC.Template.Interface.Contracts
 {
-    public interface ITestService
+    public interface ITestDBService
     {
         Task<TestObjResponse> GetTestRecordFromDB();
     }

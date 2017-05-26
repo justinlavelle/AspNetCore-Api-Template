@@ -3,8 +3,10 @@ using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Repo;
 using HC.Template.Interface.Contracts;
+using HC.Template.InternalServices.Configuration;
+using HC.Template.InternalServices.Configuration.Contracts;
+using HC.Template.InternalServices.Mappers;
 using HC.Template.InternalServices.Mappers.Contracts;
-using HC.Template.Mappers;
 using HC.Template.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -75,13 +77,20 @@ namespace WebApi
             services.AddSingleton<IConfiguration>(Configuration);   // IConfiguration explicitly
 
             // Dependency injection for our repos and services [i.e. Data Layer to Core/logic Layer]
-            services.AddTransient<IConfigService, ConfigService>();
+
+            // Dependency injection - 'Core' Services
             services.AddTransient<IExampleService, ExampleService>();
-            services.AddTransient<ITestService, TestService>();
+            services.AddTransient<ITestDBService, TestDBService>();
             services.AddTransient<ITestRepo, TestRepo>();
 
+            // Dependency injection - Internal Services
+            services.AddTransient<IConfigService, ConfigService>();
+
+            // Dependency injection - Internal Services - Mappers
             services.AddTransient<IExampleServiceMapper, ExampleServiceMapper>();
             services.AddTransient<ITestServiceMapper, TestServiceMapper>();
+            services.AddTransient<IConfigServiceMapper, ConfigServiceMapper>();
+
 
             // **** appsettings.json END **********************************************************************
 

@@ -8,6 +8,6 @@ namespace HC.Template.InternalServices.Mappers.Contracts
 {
     public interface IExampleServiceMapper
     {
-        ExampleResponse MapGetExampleString(AppSettings appSettings);
+        ExampleResponse MapAppSettingsToExample(AppSettingsResponse appSettings);
     }
 }

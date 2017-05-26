@@ -14,24 +14,32 @@ namespace WebApi.Controllers
     public class ExampleController : Controller
     {
         private IExampleService _exampleService;
-        private ITestService _testService;
+        private ITestDBService _testService;
 
-        public ExampleController(IExampleService exampleService, ITestService testService)
+        public ExampleController(IExampleService exampleService, ITestDBService testService)
         {
             _exampleService = exampleService;
             _testService = testService;
         }
 
-        [HttpPost]
-        [Route("CallConfig")]
-        public async Task<ExampleResponse> GetAppSettingsFromConfig()
+        [HttpGet]
+        [Route("GetApplicationTitle")]
+        public async Task<ExampleResponse> GetAppTitleFromConfig()
         { 
-            var response = _exampleService.GetExampleString().Result;
+            var response = _exampleService.GetApplicationTitle();
+            return response;
+        }
+
+        [HttpGet]
+        [Route("GetApplicationSettings")]
+        public async Task<AppSettingsResponse> GetAppSettingsFromConfig()
+        {
+            var response = _exampleService.GetApplicationSettings();
             return response;
         }
 
         [HttpPost]
-        [Route("CallDB")]
+        [Route("GetDBTestRecords")]
         public async Task<TestObjResponse> GetTestRecord()
         {
             var response = await _testService.GetTestRecordFromDB();

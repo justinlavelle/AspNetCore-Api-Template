@@ -7,12 +7,12 @@ using HC.Template.InternalServices.Mappers.Contracts;
 
 namespace HC.Template.Service
 {
-    public class TestService : ITestService
+    public class TestDBService : ITestDBService
     {
         private ITestRepo _testRepo;
         private ITestServiceMapper _mapper;
 
-        public TestService(ITestRepo testRepo, ITestServiceMapper mapper)
+        public TestDBService(ITestRepo testRepo, ITestServiceMapper mapper)
         {
             _testRepo = testRepo;
             _mapper = mapper;
