@@ -1,4 +1,5 @@
 ﻿using HC.Template.Interface.ServiceModels;
+using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
 using HC.Template.InternalServices.Mappers.Contracts;
 
 namespace HC.Template.InternalServices.Mappers

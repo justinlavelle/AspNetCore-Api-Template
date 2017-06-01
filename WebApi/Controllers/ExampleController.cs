@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels;
+using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
@@ -20,14 +17,6 @@ namespace WebApi.Controllers
         {
             _exampleService = exampleService;
             _testService = testService;
-        }
-
-        [HttpGet]
-        [Route("GetApplicationTitle")]
-        public async Task<ExampleResponse> GetAppTitleFromConfig()
-        { 
-            var response = _exampleService.GetApplicationTitle();
-            return response;
         }
 
         [HttpGet]

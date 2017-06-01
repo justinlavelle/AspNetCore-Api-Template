@@ -1,8 +1,8 @@
 ﻿using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels;
-using HC.Template.InternalServices.Configuration.Contracts;
+using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
+using HC.Template.InternalServices.ConfigurationService.Contracts;
 using HC.Template.InternalServices.Mappers.Contracts;
-using System.Threading.Tasks;
 
 namespace HC.Template.Service
 {

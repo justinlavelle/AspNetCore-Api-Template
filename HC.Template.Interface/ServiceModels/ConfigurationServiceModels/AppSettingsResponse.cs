@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HC.Template.Interface.ServiceModels
+namespace HC.Template.Interface.ServiceModels.ConfigurationServiceModels
 {
     public class AppSettingsResponse
     {
@@ -15,8 +15,8 @@ namespace HC.Template.Interface.ServiceModels
         public string StringSetting { get; set; }
         public int IntSetting { get; set; }
         public Dictionary<string, InnerClassVals> Dict { get; set; } // Dictionaries must have string keys
-        public List<string> ListOfValues { get; set; }
-        public string EnumSwitchVal { get; set; }
+        public IEnumerable<string> ListOfValues { get; set; }
+        public EnumSwitch EnumSwitchVal { get; set; }
 
     }
 
@@ -28,8 +28,8 @@ namespace HC.Template.Interface.ServiceModels
 
     public enum EnumSwitch
     {
-        On = 0,
-        Off = 1
+        Off = 0,
+        On = 1
     }
 
 }
