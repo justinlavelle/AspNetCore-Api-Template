@@ -1,16 +1,17 @@
-### TODO List for .NET Core Template (As of 22/05/2017)
+### TODO List for .NET Core Template (As of 02/06/2017)
 
 - [ ] Create Health Check method(s)
-    - [ ] Make a connection to the Database
+    - [X] Make a connection to the Database 
     - [ ] Report Sql Server Name ( @@ServerName )
     - [ ] Report Api/dll Version   
     
-- [ ] Implement strongly-typed configuration settings through IOptions pattern (appsettings.json)
-    - [ ] Create Test method to read AppSettings from appsettings.json in service layer
+- [X] Implement strongly-typed configuration settings through IOptions pattern (appsettings.json)
+    - [X] Create Test method to read AppSettings from appsettings.json in service layer (Created an internal 'Config' service
 
 - [x] Swashbuckle/swagger test method implementation page
     - [x] Create Comments for methods + Auto Documentation (xml)
+    
 - [ ] Logging [GrayLogging or intel .net core logging
   
-- [ ] Implement (Moq ?) Unit Test Framework
 - [ ] Write unit tests
+    - [ ] Implement (Moq ?) Unit Test Framework
