@@ -21,10 +21,7 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
         }
         public async Task<IEnumerable<TestObj>> GetTestRecord()
         {
-            var sqlCmd = "Select 'TestField1' as 'Field1'," +
-                         "       'TestField2' as 'Field2'" +
-                         "       'TestField3' as 'Field3'" +
-                         "       'TestField4' as 'Field4'";
+            var sqlCmd = "select 'TestField1' as 'Field1', 'TestField2' as 'Field2', 'TestField3' as 'Field3', 'TestField4' as 'Field4' ";
 
             return await DapperRepo.ExecuteDynamicSql<TestObj>(
                 sql: sqlCmd,

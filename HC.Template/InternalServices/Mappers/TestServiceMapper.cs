@@ -10,8 +10,7 @@ namespace HC.Template.InternalServices.Mappers
     {
         public TestObjResponse MapGetTestRecordFromDB(IEnumerable<TestObj> testRecords)
         {
-            var result = new TestObjResponse();
-
+            var recordList = new List<TestObjRecord>();
             foreach (var record in testRecords.ToList())
             {
                 var testRecord = new TestObjRecord()
@@ -19,9 +18,13 @@ namespace HC.Template.InternalServices.Mappers
                     Field1 = record.Field1,
                     Field2 = record.Field2
                 };
-
-                result.TestRecords.ToList().Add(testRecord);
+                recordList.Add(testRecord);
             }
+
+            var result = new TestObjResponse()
+            {
+                TestRecords = recordList.AsEnumerable()
+            };
 
             return result;
         }

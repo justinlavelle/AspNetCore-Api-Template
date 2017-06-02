@@ -21,13 +21,12 @@ namespace HC.Template.InternalServices.Mappers
 
         public AppSettingsResponse MapAppSettings(AppSettings appSettings)
         {
-            var response = new AppSettingsResponse()
+            var result = new AppSettingsResponse()
             {
                 AppSettingVals = new AppSettingsVals()
                 {
                     ApplicationTitle = appSettings.ApplicationTitle,
                     Dict = new Dictionary<string, InnerClassVals>(),
-                    ListOfValues = new List<string>(),
                     EnumSwitchVal = (EnumSwitch) Convert.ToInt32(appSettings.AnEnumSwitch),
                     IntSetting = appSettings.IntSetting,
                     StringSetting = appSettings.StringSetting
@@ -35,14 +34,16 @@ namespace HC.Template.InternalServices.Mappers
             };
 
             // Mapping a list
-            foreach(var listVal in appSettings.ListOfValues)
+            var stringList = new List<string>();
+            foreach(var stringVal in appSettings.ListOfValues)
             {
-                
-                response.AppSettingVals.ListOfValues.ToList().Add(listVal);
+                stringList.Add(stringVal);
             }
 
+            result.AppSettingVals.ListOfValues = stringList.AsEnumerable();
+
             // Mapping a dictionary - which is a generic collection
-            foreach(var dictEntry in appSettings.DictSetting)
+            foreach (var dictEntry in appSettings.DictSetting)
             {
                 var innerClassVal = new InnerClassVals()
                 {
@@ -50,10 +51,10 @@ namespace HC.Template.InternalServices.Mappers
                     Name = dictEntry.Value.Name
                 };
 
-                response.AppSettingVals.Dict.Add(dictEntry.Key, innerClassVal);
+                result.AppSettingVals.Dict.Add(dictEntry.Key, innerClassVal);
             }
 
-            return response;
+            return result;
         }
 
         public ConfigSettingsResponse MapConfigSettings(ConfigSettings configSettings)
@@ -63,7 +64,7 @@ namespace HC.Template.InternalServices.Mappers
 
         public DictSettingResponse MapDictionarySetting(AppSettings appSettings)
         {
-            var response = new DictSettingResponse()
+            var result = new DictSettingResponse()
             {
                 DictionaryValues = new Dictionary<string, InnerClass>()
             };
@@ -76,55 +77,57 @@ namespace HC.Template.InternalServices.Mappers
                     Name = dictEntry.Value.Name
                 };
 
-                response.DictionaryValues.Add(dictEntry.Key, innerClassVal);
+                result.DictionaryValues.Add(dictEntry.Key, innerClassVal);
             }
 
-            return response;
+            return result;
         }
 
         public EnumSettingResponse MapEnumSetting(AppSettings appSettings)
         {
-            var response = new EnumSettingResponse()
+            var result = new EnumSettingResponse()
             {
                 InternalEnum = (InternalEnum)Convert.ToInt32(appSettings.AnEnumSwitch),
             };
 
-            return response;
+            return result;
         }
 
         public IntSettingResponse MapIntSetting(AppSettings appSettings)
         {
-            var response = new IntSettingResponse()
+            var result = new IntSettingResponse()
             {
                 IntValue = appSettings.IntSetting
             };
 
-            return response;
+            return result;
         }
 
         public ListSettingResponse MapListSetting(AppSettings appSettings)
         {
-            var response = new ListSettingResponse()
+            // Mapping a list
+            var stringList = new List<string>();
+            foreach (var stringVal in appSettings.ListOfValues)
             {
-                 ListOfStrings = new List<string>()
-            };
-
-            foreach (var listVal in appSettings.ListOfValues)
-            {
-                response.ListOfStrings.ToList().Add(listVal);
+                stringList.Add(stringVal);
             }
 
-            return response;
+            var result = new ListSettingResponse()
+            {
+                ListOfStrings = stringList.AsEnumerable()
+            };
+
+            return result;
         }
 
         public StringSettingResponse MapStringSetting(AppSettings appSettings)
         {
-            var response = new StringSettingResponse()
+            var result = new StringSettingResponse()
             {
                  StringValue = appSettings.StringSetting
             };
 
-            return response;
+            return result;
         }
     }
 }

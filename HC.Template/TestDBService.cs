@@ -20,10 +20,17 @@ namespace HC.Template.Service
 
         public async Task<TestObjResponse> GetTestRecordFromDB()
         {
-            var response = await _testRepo.GetTestRecord();
-            var result = _mapper.MapGetTestRecordFromDB(response);
+            try
+            {
+                var response = await _testRepo.GetTestRecord();
+                var result = _mapper.MapGetTestRecordFromDB(response);
 
-            return result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
