@@ -45,9 +45,6 @@ namespace WebApi
             // Add framework services.
             services.AddMvc();
 
-            // Add Automapper library for mapping poco objects
-            services.AddAutoMapper();
-
             // Add SwaggerUI to the API
             var pathToDoc = Configuration["Swagger:FileName"];
             services.AddSwaggerGen(c =>
