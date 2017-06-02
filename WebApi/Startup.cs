@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using HC.Template.Infrastructure.ConfigModels;
+﻿using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Repo;
 using HC.Template.Interface.Contracts;
