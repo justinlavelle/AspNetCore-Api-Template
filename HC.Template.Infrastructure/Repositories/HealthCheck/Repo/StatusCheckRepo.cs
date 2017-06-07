@@ -12,7 +12,7 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
     /// <summary>
     /// Service Status Middleware used to check the Health of your service.
     /// </summary>
-    public class StatusCheckRepo: IStatusCheck
+    public class StatusCheckRepo: IStatusCheckRepo
     {
         public Task Ping(HttpContext httpContext)
         {

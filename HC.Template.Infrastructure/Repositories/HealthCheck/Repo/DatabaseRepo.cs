@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
 {
-    public class DatabaseRepo : IDatabaseCheck
+    public class DatabaseRepo : IDBCheckRepo
     {
         public Task<string> Check()
         {

@@ -8,6 +8,6 @@ namespace HC.Template.InternalServices.Mappers.Contracts
 {
     public interface ITestServiceMapper
     {
-        TestObjResponse MapGetTestRecordFromDB(IEnumerable<TestObj> testRecords);
+        TestObjResponse MapGetTestRecordFromDB(IEnumerable<TestObj1> testRecords);
     }
 }

@@ -8,7 +8,8 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Contracts
 {
     public interface ITestRepo
     {
-        Task<IEnumerable<TestObj>> GetTestRecord();
+        Task<IEnumerable<TestObj1>> GetDynamicSqlRecord();
+        Task<IEnumerable<TestObj2>> GetStoredProcRecord();
     }
 
 }

@@ -12,9 +12,9 @@ namespace HC.Template.Infrastructure.Base
         //private IConfiguration config;
         protected ConnectionStrings connectionStrings { get; }
 
-        public BaseRepo(ConnectionStrings conSettings)
+        public BaseRepo()
         {
-            connectionStrings = conSettings;    // Strongly-Typed settings
+            //connectionStrings = conSettings;    // Strongly-Typed settings
         }
 
         protected string DefaultConnectionString

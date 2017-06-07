@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Adapters\" />
-    <Folder Include="UOWs\Contracts\" />
+    <Folder Include="Assets\Stored Procedures\" />
   </ItemGroup>
 
   <ItemGroup>

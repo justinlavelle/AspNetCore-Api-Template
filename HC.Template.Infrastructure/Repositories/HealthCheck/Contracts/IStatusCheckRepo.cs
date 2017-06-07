@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HC.Template.Infrastructure.Repositories.HealthCheck.Contracts
 {
-    public interface IDatabaseCheck
+    public interface IStatusCheckRepo
     {
-        Task<string> Check();
+        Task Ping(HttpContext httpContext);
     }
 }

@@ -22,7 +22,7 @@ namespace HC.Template.Service
         {
             try
             {
-                var response = await _testRepo.GetTestRecord();
+                var response = await _testRepo.GetDynamicSqlRecord();
                 var result = _mapper.MapGetTestRecordFromDB(response);
 
                 return result;

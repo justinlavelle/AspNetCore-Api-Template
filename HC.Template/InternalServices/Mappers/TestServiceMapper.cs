@@ -8,7 +8,7 @@ namespace HC.Template.InternalServices.Mappers
 {
     public class TestServiceMapper: ITestServiceMapper
     {
-        public TestObjResponse MapGetTestRecordFromDB(IEnumerable<TestObj> testRecords)
+        public TestObjResponse MapGetTestRecordFromDB(IEnumerable<TestObj1> testRecords)
         {
             var recordList = new List<TestObjRecord>();
             foreach (var record in testRecords.ToList())
