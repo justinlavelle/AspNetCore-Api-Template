@@ -23,6 +23,11 @@ as
            'hc_test_stored_procedure'      as 'Field6', 
            'Param2 = 0'                    as 'Field7', 
            'Sample Data 1: ' + @SampleData as 'Field8' 
+    union 
+    select 'Stored Procedure: '            as 'Field5', 
+           'hc_test_stored_procedure'      as 'Field6', 
+           'Param2 = 0'                    as 'Field7', 
+           'Test Data 1: ' + @SampleData   as 'Field8' 
   end
   else
   begin
@@ -30,9 +35,14 @@ as
            'hc_test_stored_procedure'      as 'Field6', 
            'Param2 = 0'                    as 'Field7', 
            'Sample Data 2: ' + @SampleData as 'Field8' 
+    union
+    select 'Stored Procedure: '            as 'Field5', 
+           'hc_test_stored_procedure'      as 'Field6', 
+           'Param2 = 0'                    as 'Field7', 
+           'Test Data 2: ' + @SampleData   as 'Field8' 
   end
 
-  if @@Error <> 0 or @@RowCount <> 1
+  if @@Error <> 0
   begin
     select @ErrorMsg = 'Error retrieving test data. (hc_adax_item_integration)'
     raiserror(@ErrorMsg, 16, 1)

@@ -25,8 +25,8 @@ namespace HC.Template.Infrastructure.UOWs
         {
             _connection = new SqlConnection(DefaultConnectionString);
             _connection.Open();
-            _transaction = _connection.BeginTransaction();
 
+            _transaction = _connection.BeginTransaction();
         }
 
         public ITestRepo TestRepo

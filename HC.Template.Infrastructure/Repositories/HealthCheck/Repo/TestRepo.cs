@@ -36,10 +36,10 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
                 .ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<TestObj2>> GetStoredProcRecord()
+        public async Task<IEnumerable<TestObj2>> GetStoredProcRecord(int Param1, bool Param2)
         {
             var response = await DapperRepo.GetFromStoredProc<TestObj2>
-                   (storedProcedureName: "hc_thirdparty_auto_get",
+                   (storedProcedureName: "hc_test_stored_procedure",
                     dbconnectionString: DefaultConnectionString, //_connectionSettings.Conn1,
                     sqltimeout: DefaultTimeOut,
                     dbconnection: _connection,

@@ -1,8 +1,8 @@
-using HC.Template.Interface.Contracts;
-using HC.Template.Interface.ServiceModels;
-using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using HC.Template.Interface.Contracts;
+using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
+using HC.Template.Interface.ServiceModels.TestServiceModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
@@ -11,12 +11,10 @@ namespace WebApi.Controllers
     public class ExampleController : Controller
     {
         private IExampleService _exampleService;
-        private ITestDBService _testService;
 
-        public ExampleController(IExampleService exampleService, ITestDBService testService)
+        public ExampleController(IExampleService exampleService)
         {
             _exampleService = exampleService;
-            _testService = testService;
         }
 
         [HttpGet]
@@ -26,15 +24,6 @@ namespace WebApi.Controllers
             var response = _exampleService.GetApplicationSettings();
             return response;
         }
-
-        [HttpPost]
-        [Route("GetDBTestRecords")]
-        public async Task<TestObjResponse> GetTestRecord()
-        {
-            var response = await _testService.GetTestRecordFromDB();
-            return response;
-        }
-        
 
     }
 }

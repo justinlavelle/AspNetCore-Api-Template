@@ -1,13 +1,12 @@
-﻿using HC.Template.Interface.ServiceModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using HC.Template.Interface.ServiceModels.TestServiceModels;
 
 namespace HC.Template.Interface.Contracts
 {
     public interface ITestDBService
     {
-        Task<TestObjResponse> GetTestRecordFromDB();
+        Task<TestObj1Response> GetDynamicSqlData();
+
+        Task<TestObj2Response> GetStoredProcData(TestObj2Request request);
     }
 }
