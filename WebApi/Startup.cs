@@ -77,7 +77,7 @@ namespace WebApi
             // Dependency injection - 'Core' Services
             services.AddTransient<IExampleService, ExampleService>();
             services.AddTransient<ITestDBService, TestDBService>();
-            services.AddTransient<ITestRepo, TestRepo>();
+            // services.AddTransient<ITestRepo, TestRepo>(); // Removed because Unit of Work creates an instance of this.
 
             // Dependency injection - Internal Services
             services.AddTransient<IConfigService, ConfigService>();

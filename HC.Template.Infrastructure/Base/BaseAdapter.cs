@@ -1,20 +1,14 @@
 ﻿using HC.Template.Infrastructure.ConfigModels;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using System;
-using System.Data.SqlClient;
 
 namespace HC.Template.Infrastructure.Base
 {
-    public class BaseRepo
+    public abstract class BaseAdapter
     {
-        //private IConfiguration config;
-        protected ConnectionStrings connectionStrings { get; }
+        ConnectionStrings connectionStrings { get; }
 
-        public BaseRepo()
+        public BaseAdapter()
         {
-            //connectionStrings = conSettings;    // Strongly-Typed settings
+
         }
 
         protected string DefaultConnectionString

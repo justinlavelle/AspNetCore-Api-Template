@@ -12,7 +12,7 @@ using System.Data;
 
 namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
 {
-    public class TestRepo: BaseRepo, ITestRepo
+    public class TestRepo: BaseAdapter, ITestRepo
     {
         private IDbTransaction _transaction;
         private IDbConnection _connection;
@@ -27,24 +27,29 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
         {
             var sqlCmd = "select 'TestField1' as 'Field1', 'TestField2' as 'Field2', 'TestField3' as 'Field3', 'TestField4' as 'Field4' ";
 
-            return await DapperRepo.ExecuteDynamicSql<TestObj1>(
+            var response = await DapperRepo.ExecuteDynamicSql<TestObj1>(
                 sql: sqlCmd,
                 dbconnectionString: DefaultConnectionString, //_connectionSettings.Conn1,
                 sqltimeout: DefaultTimeOut,
                 dbconnection: _connection,
                 dbtransaction: _transaction)
                 .ConfigureAwait(false);
+
+            return response;
         }
 
         public async Task<IEnumerable<TestObj2>> GetStoredProcRecord(int Param1, bool Param2)
         {
+            var sqlStoredProc = "hc_test_stored_procedure";
+
             var response = await DapperRepo.GetFromStoredProc<TestObj2>
-                   (storedProcedureName: "hc_test_stored_procedure",
+                   (storedProcedureName: sqlStoredProc,
                     dbconnectionString: DefaultConnectionString, //_connectionSettings.Conn1,
                     sqltimeout: DefaultTimeOut,
                     dbconnection: _connection,
                     dbtransaction: _transaction)
                     .ConfigureAwait(false);
+
             return response;
 
         }
