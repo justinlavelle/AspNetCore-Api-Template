@@ -1,33 +1,26 @@
-﻿using HC.Template.Infrastructure.ConfigModels;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using HC.Template.Infrastructure.ConfigModels;
 using Microsoft.Extensions.Configuration;
 
 namespace HC.Template.Infrastructure.Base
 {
-    public abstract class BaseAdapter
+    public abstract class BaseUow
     {
         private IConfiguration config;
         private readonly ConnectionStrings _connectionStrings;
-
-        public BaseAdapter(ConnectionStrings connectionStrings)
+        public BaseUow(ConnectionStrings connectionStrings)
         {
             _connectionStrings = connectionStrings;
         }
 
-        protected string DefaultConnectionString
+        protected virtual string DefaultUowConnectionString
         {
             get
             {
                 return _connectionStrings.Conn1; // specifies a specific connection string
             }
         }
-
-        protected int DefaultTimeOut
-        {
-            get
-            {
-                return _connectionStrings.Timeout;
-            }
-        }
-
     }
 }

@@ -9,7 +9,7 @@ using HC.Template.Infrastructure.UOWs.Contracts;
 
 namespace HC.Template.Infrastructure.UOWs
 {
-    public class UnitOfWork: BaseAdapter, IUnitOfWork
+    public class UnitOfWork: BaseUow, IUnitOfWork
     {
         private IDbConnection _connection;
         private IDbTransaction _transaction;
@@ -25,7 +25,7 @@ namespace HC.Template.Infrastructure.UOWs
         {
             _connectionSettings = connectionStrings;
 
-            var connString = DefaultConnectionString;
+            var connString = DefaultUowConnectionString;
 
             // Setup Connection & Transaction
             _connection = new SqlConnection(connString);

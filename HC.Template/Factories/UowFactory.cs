@@ -9,22 +9,6 @@ namespace HC.Template.Factories
     {
         private ConnectionStrings _connectionSettings;
 
-        /* *************************************
-         * Not sure if I should use this. Depends on dependency injection from startup.cs
-        //private IUnitOfWork _uow;
-        //public UowFactory(ConnectionStrings connectionSettings, IUnitOfWork uow) : base()
-        //{
-        //    _connectionSettings = connectionSettings;
-        //    _uow = uow;
-        //}
-
-        //public IUnitOfWork GetUnitOfWork()
-        //{
-        //    return _uow;
-        //}
-       
-         */
-
         public UowFactory(ConnectionStrings connectionSettings) : base()
         {
             _connectionSettings = connectionSettings;

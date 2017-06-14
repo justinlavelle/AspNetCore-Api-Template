@@ -9,7 +9,7 @@ using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
 
 namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
 {
-    public class TestRepo: BaseAdapter, ITestRepo
+    public class TestRepo: BaseRepo, ITestRepo
     {
         private IDbTransaction _transaction;
         private IDbConnection _connection;
