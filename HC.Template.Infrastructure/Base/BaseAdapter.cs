@@ -1,21 +1,23 @@
 ﻿using HC.Template.Infrastructure.ConfigModels;
+using Microsoft.Extensions.Configuration;
 
 namespace HC.Template.Infrastructure.Base
 {
     public abstract class BaseAdapter
     {
-        ConnectionStrings connectionStrings { get; }
+        private IConfiguration config;
+        private readonly ConnectionStrings _connectionStrings;
 
-        public BaseAdapter()
+        public BaseAdapter(ConnectionStrings connectionStrings)
         {
-
+            _connectionStrings = connectionStrings;
         }
 
         protected string DefaultConnectionString
         {
             get
             {
-                return connectionStrings.Conn1; // specifies a specific connection string
+                return _connectionStrings.Conn1; // specifies a specific connection string
             }
         }
 
@@ -23,11 +25,9 @@ namespace HC.Template.Infrastructure.Base
         {
             get
             {
-                return connectionStrings.Timeout;
+                return _connectionStrings.Timeout;
             }
         }
-
-
 
     }
 }

@@ -1,3 +1,5 @@
+use Omega;
+
 /* -------------------------------------------------------------------------- */
 /*  1. hc_test_stored_procedure                                               */
 print 'hc_test_stored_procedure'
@@ -6,8 +8,8 @@ if (select object_id('hc_test_stored_procedure')) is not null
 go
 
 create procedure hc_test_stored_procedure
-       @Param1  int,
-       @Param2  bit
+       @Parameter1  int,
+       @Parameter2  bit
 as
   set nocount on
 
@@ -15,9 +17,9 @@ as
           @SampleData        varchar(10)  = '',
           @ErrorMsg          varchar(max) = ''
 
-  set @SampleData = (select cast(@Param1 as varchar(10)))
+  set @SampleData = (select cast(@Parameter1 as varchar(10)))
 
-  if (@Param2 = 0)
+  if (@Parameter2 = 0)
   begin
     select 'Stored Procedure: '            as 'Field5', 
            'hc_test_stored_procedure'      as 'Field6', 

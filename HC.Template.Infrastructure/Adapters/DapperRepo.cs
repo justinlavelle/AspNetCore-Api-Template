@@ -40,17 +40,15 @@ namespace HC.Template.Infrastructure.Adapters
             int? sqltimeout = null,
             IDbTransaction dbtransaction = null)
         {
-            using (var connection = OpenDBConnection(dbconnectionString, dbconnection))
-            {
-                return await connection.QueryAsync<T>
-                (
-                    sql: storedProcedureName,
-                    param: parameters,
-                    commandType: CommandType.StoredProcedure,
-                    transaction: dbtransaction,
-                    commandTimeout: GetSqlTimeOut(sqltimeout)
-                ).ConfigureAwait(false);
-            }
+            var connection = OpenDBConnection(dbconnectionString, dbconnection);
+            return await connection.QueryAsync<T>
+            (
+                sql: storedProcedureName,
+                param: parameters,
+                commandType: CommandType.StoredProcedure,
+                transaction: dbtransaction,
+                commandTimeout: GetSqlTimeOut(sqltimeout)
+            ).ConfigureAwait(false);
         }
 
         public static async Task<int> ExecuteAsStoredProc(
@@ -64,17 +62,15 @@ namespace HC.Template.Infrastructure.Adapters
             DynamicParameters p = new DynamicParameters(parameters);
             p.Add("@ReturnValue", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
 
-            using (var connection = OpenDBConnection(dbconnectionString, dbconnection))
-            {
-                await connection.ExecuteAsync
-                (
-                    sql: storedProcedureName,
-                    param: p,
-                    commandType: CommandType.StoredProcedure,
-                    transaction: dbtransaction,
-                    commandTimeout: GetSqlTimeOut(sqltimeout)
-                ).ConfigureAwait(false);
-            }
+            var connection = OpenDBConnection(dbconnectionString, dbconnection);
+            await connection.ExecuteAsync
+            (
+                sql: storedProcedureName,
+                param: p,
+                commandType: CommandType.StoredProcedure,
+                transaction: dbtransaction,
+                commandTimeout: GetSqlTimeOut(sqltimeout)
+            ).ConfigureAwait(false);
 
             return p.Get<int>("@ReturnValue");
         }
@@ -98,17 +94,16 @@ namespace HC.Template.Infrastructure.Adapters
             }
             p.Add("@ReturnValue", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
 
-            using (var connection = OpenDBConnection(dbconnectionString, dbconnection))
-            {
-                await connection.ExecuteAsync
-                (
-                    sql: storedProcedureName,
-                    param: p,
-                    commandType: CommandType.StoredProcedure,
-                    transaction: dbtransaction,
-                    commandTimeout: GetSqlTimeOut(sqltimeout)
-                ).ConfigureAwait(false);
-            }
+            var connection = OpenDBConnection(dbconnectionString, dbconnection);
+            await connection.ExecuteAsync
+            (
+                sql: storedProcedureName,
+                param: p,
+                commandType: CommandType.StoredProcedure,
+                transaction: dbtransaction,
+                commandTimeout: GetSqlTimeOut(sqltimeout)
+            ).ConfigureAwait(false);
+
             // add values from output parameters to dictionary
             Dictionary<string, object> returnOutputParameter = new Dictionary<string, object>();
             foreach (var param in outputParameters)
@@ -127,16 +122,14 @@ namespace HC.Template.Infrastructure.Adapters
                 int? sqltimeout = null,
                 IDbTransaction dbtransaction = null)
         {
-            using (var connection = OpenDBConnection(dbconnectionString, dbconnection))
-            {
-                return await connection.QueryAsync<T>
-                (
-                    sql: sql,
-                    commandType: CommandType.Text,
-                    transaction: dbtransaction,
-                    commandTimeout: GetSqlTimeOut(sqltimeout)
-                ).ConfigureAwait(false);
-            }
+            var connection = OpenDBConnection(dbconnectionString, dbconnection);
+            return await connection.QueryAsync<T>
+            (
+                sql: sql,
+                commandType: CommandType.Text,
+                transaction: dbtransaction,
+                commandTimeout: GetSqlTimeOut(sqltimeout)
+            ).ConfigureAwait(false);
         }
     }
 }

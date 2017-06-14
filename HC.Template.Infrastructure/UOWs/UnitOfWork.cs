@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 using HC.Template.Infrastructure.Base;
+using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Repo;
 using HC.Template.Infrastructure.UOWs.Contracts;
@@ -20,19 +19,23 @@ namespace HC.Template.Infrastructure.UOWs
         private IStatusCheckRepo _statusCheckRepo;
 
         private bool _disposed;
+        private ConnectionStrings _connectionSettings;
 
-        public UnitOfWork():base()
+        public UnitOfWork(ConnectionStrings connectionStrings) : base(connectionStrings)
         {
+            _connectionSettings = connectionStrings;
+
             var connString = DefaultConnectionString;
+
+            // Setup Connection & Transaction
             _connection = new SqlConnection(connString);
             _connection.Open();
-
             _transaction = _connection.BeginTransaction();
         }
 
         public ITestRepo TestRepo
         {
-            get { return _testRepo ?? (_testRepo = new TestRepo(_connection, _transaction)); }
+            get { return _testRepo ?? (_testRepo = new TestRepo(_connection, _transaction, _connectionSettings)); }
         }
 
         public IDBCheckRepo DbRepo => throw new NotImplementedException();
