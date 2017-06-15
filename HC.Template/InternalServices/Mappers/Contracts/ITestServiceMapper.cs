@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using HC.Template.Domain.Models;
-using HC.Template.Interface.ServiceModels;
+using HC.Template.Interface.ServiceModels.TestServiceModels;
 
 namespace HC.Template.InternalServices.Mappers.Contracts
 {
     public interface ITestServiceMapper
     {
-        TestObjResponse MapGetTestRecordFromDB(IEnumerable<TestObj> testRecords);
+        TestObj1Response MapGetDynamicSqlData(IEnumerable<TestObj1> testRecords);
+        TestObj2Response MapGetStoredProcData(IEnumerable<TestObj2> testRecords);
     }
 }

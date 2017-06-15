@@ -1,35 +1,48 @@
-﻿using HC.Template.Interface.Contracts;
-using System;
-using HC.Template.Interface.ServiceModels;
+﻿using System;
 using System.Threading.Tasks;
+using HC.Template.Factories;
+using HC.Template.Factories.Contracts;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
+using HC.Template.Interface.Contracts;
+using HC.Template.Interface.ServiceModels.TestServiceModels;
 using HC.Template.InternalServices.Mappers.Contracts;
 
 namespace HC.Template.Service
 {
     public class TestDBService : ITestDBService
     {
-        private ITestRepo _testRepo;
-        private ITestServiceMapper _mapper;        
+        private IUowFactory _uowFactory;
+        private ITestServiceMapper _mapper;
 
-        public TestDBService(ITestRepo testRepo, ITestServiceMapper mapper)
+        public TestDBService(ITestServiceMapper mapper, IUowFactory uowFactory)
         {
-            _testRepo = testRepo;
             _mapper = mapper;
+            _uowFactory = uowFactory;
         }
 
-        public async Task<TestObjResponse> GetTestRecordFromDB()
+        public async Task<TestObj1Response> GetDynamicSqlData()
         {
-            try
+            using (var uow = _uowFactory.GetUnitOfWork())
             {
-                var response = await _testRepo.GetTestRecord();
-                var result = _mapper.MapGetTestRecordFromDB(response);
+                var response = await uow.TestRepo.GetDynamicSqlRecord();
+                var commitSuccess = uow.Commit();
 
+                var result = _mapper.MapGetDynamicSqlData(response);
                 return result;
             }
-            catch (Exception ex)
+        }
+
+        public async Task<TestObj2Response> GetStoredProcData(TestObj2Request request)
+        {
+            using (var uow = _uowFactory.GetUnitOfWork())
             {
-                throw;
+
+                var response = await uow.TestRepo.GetStoredProcRecord(request.Parameter1, request.Parameter2);
+                var commitSuccess = uow.Commit();
+
+                var result = _mapper.MapGetStoredProcData(response);
+                return result;
+
             }
         }
     }

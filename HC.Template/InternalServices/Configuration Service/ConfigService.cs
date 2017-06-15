@@ -13,8 +13,9 @@ namespace HC.Template.InternalServices.ConfigurationService
         private IConfigServiceMapper _mapper;
         protected AppSettings _appSettings { get; }
         protected ConfigSettings _configSettings { get; }
+        protected ConnectionStrings _connStrings { get; }
 
-        public ConfigService(IConfiguration config, AppSettings appSettings, ConfigSettings configSettings, IConfigServiceMapper mapper)
+        public ConfigService(IConfiguration config, AppSettings appSettings, ConfigSettings configSettings, IConfigServiceMapper mapper, ConnectionStrings _connStrings)
         {
             _config = config;
             _appSettings = appSettings;
