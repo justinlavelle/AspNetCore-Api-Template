@@ -2,6 +2,7 @@ using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels;
 using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace WebApi.Controllers
@@ -12,11 +13,14 @@ namespace WebApi.Controllers
     {
         private IExampleService _exampleService;
         private ITestDBService _testService;
+     //   private ILogger _logger;
 
         public ExampleController(IExampleService exampleService, ITestDBService testService)
         {
             _exampleService = exampleService;
             _testService = testService;
+//            _logger = logger;
+
         }
 
         [HttpGet]

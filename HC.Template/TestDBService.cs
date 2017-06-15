@@ -10,7 +10,7 @@ namespace HC.Template.Service
     public class TestDBService : ITestDBService
     {
         private ITestRepo _testRepo;
-        private ITestServiceMapper _mapper;
+        private ITestServiceMapper _mapper;        
 
         public TestDBService(ITestRepo testRepo, ITestServiceMapper mapper)
         {

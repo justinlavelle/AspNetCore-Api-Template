@@ -25,8 +25,8 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
 
             return await DapperRepo.ExecuteDynamicSql<TestObj>(
                 sql: sqlCmd,
-                dbconnectionString: _connectionSettings.Conn1,
-                sqltimeout: _connectionSettings.Timeout)
+                dbconnectionString: DefaultConnectionString,
+                sqltimeout: DefaultTimeOut)
                 .ConfigureAwait(false);                
         }
 

@@ -1,18 +1,22 @@
-﻿using HC.Template.Infrastructure.ConfigModels;
+﻿using HC.Template.Infrastructure;
+using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Repo;
 using HC.Template.Interface.Contracts;
+using HC.Template.InternalServices;
 using HC.Template.InternalServices.ConfigurationService;
 using HC.Template.InternalServices.ConfigurationService.Contracts;
 using HC.Template.InternalServices.Mappers;
 using HC.Template.InternalServices.Mappers.Contracts;
 using HC.Template.Service;
+using HC.Template.WebApi.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NLog.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace WebApi
@@ -21,6 +25,7 @@ namespace WebApi
     {
         public Startup(IHostingEnvironment env)
         {
+            env.ConfigureNLog("nlog.config");
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -41,7 +46,7 @@ namespace WebApi
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {            
             // Add framework services.
             services.AddMvc();
 
@@ -86,7 +91,10 @@ namespace WebApi
             services.AddTransient<IExampleServiceMapper, ExampleServiceMapper>();
             services.AddTransient<ITestServiceMapper, TestServiceMapper>();
             services.AddTransient<IConfigServiceMapper, ConfigServiceMapper>();
-
+            
+            // Dependency injection - Logging
+            services.AddTransient<ILoggerService, LoggerService>();
+            
 
             // **** appsettings.json END **********************************************************************
 
@@ -96,8 +104,9 @@ namespace WebApi
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             // Add Logging
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddDebug();
+            loggerFactory.AddNLog();
 
             if (env.IsDevelopment())
             {
@@ -106,10 +115,9 @@ namespace WebApi
             else
             {
                 app.UseExceptionHandler("/Home/Error"); // specify a specific error page.
-            }
-
+            }            
             app.UseStaticFiles();
-
+            app.UseExceptionHandleMiddleware();
             app.UseMvc(routes =>
             {   // Creates a default route where route is not added to controller method.
                 routes.MapRoute(
