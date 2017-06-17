@@ -1,10 +1,8 @@
 ﻿using HC.Template.Domain.Models;
-using HC.Template.Interface.ServiceModels;
+using HC.Template.Interface.ServiceModels.TestServiceModels;
 using HC.Template.InternalServices.Mappers.Contracts;
 using System.Collections.Generic;
 using System.Linq;
-using HC.Template.Interface.ServiceModels.TestServiceModels;
-using System;
 
 namespace HC.Template.InternalServices.Mappers
 {
@@ -38,8 +36,9 @@ namespace HC.Template.InternalServices.Mappers
             {
                 var testRecord = new TestObj2Record()
                 {
-                    Field6 = record.Field6,
-                    Field8 = record.Field8
+                    CustomerId = record.CustomerId,
+                    FirstName = record.FirstName,
+                    LastName = record.LastName
                 };
                 recordList.Add(testRecord);
             }

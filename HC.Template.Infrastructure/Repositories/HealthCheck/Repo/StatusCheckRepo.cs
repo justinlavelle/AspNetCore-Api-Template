@@ -1,10 +1,9 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
+﻿using HC.Template.Domain.Models;
+using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
-using HC.Template.Domain.Models;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
 {

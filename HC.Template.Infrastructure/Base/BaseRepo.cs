@@ -1,5 +1,4 @@
 ﻿using HC.Template.Infrastructure.ConfigModels;
-using Microsoft.Extensions.Configuration;
 
 namespace HC.Template.Infrastructure.Base
 {

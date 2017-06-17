@@ -10,12 +10,12 @@ namespace HC.Template.InternalServices.ConfigurationService
     public class ConfigService : IConfigService
     {
         private IConfiguration _config;
-        private IConfigServiceMapper _mapper;
+        private IAppSettingsServiceMapper _mapper;
         protected AppSettings _appSettings { get; }
         protected ConfigSettings _configSettings { get; }
         protected ConnectionStrings _connStrings { get; }
 
-        public ConfigService(IConfiguration config, AppSettings appSettings, ConfigSettings configSettings, IConfigServiceMapper mapper, ConnectionStrings _connStrings)
+        public ConfigService(IConfiguration config, AppSettings appSettings, ConfigSettings configSettings, IAppSettingsServiceMapper mapper, ConnectionStrings _connStrings)
         {
             _config = config;
             _appSettings = appSettings;

@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using HC.Template.Interface.ServiceModels.TestServiceModels;
+﻿using HC.Template.Interface.ServiceModels.TestServiceModels;
+using System.Threading.Tasks;
 
 namespace HC.Template.Interface.Contracts
 {

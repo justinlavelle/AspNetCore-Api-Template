@@ -1,7 +1,7 @@
 ﻿using HC.Template.Factories;
 using HC.Template.Factories.Contracts;
-﻿using HC.Template.Infrastructure;
 using HC.Template.Infrastructure.ConfigModels;
+using HC.Template.Infrastructure.Logging;
 using HC.Template.Interface.Contracts;
 using HC.Template.InternalServices.ConfigurationService;
 using HC.Template.InternalServices.ConfigurationService.Contracts;
@@ -79,13 +79,13 @@ namespace WebApi
             // Dependency injection for our repos and services [i.e. Data Layer to Core/logic Layer]
 
             // Dependency injection - 'Core' Services
-            services.AddTransient<IExampleService, ExampleService>();
+            services.AddTransient<IAppSettingsService, AppSettingsService>();
             services.AddTransient<ITestDBService, TestDBService>();
 
             // Dependency injection - 'Repo' Repositories
             // services.AddTransient<ITestRepo, TestRepo>(); // Removed because Unit of Work creates an instance of this.
 
-            //services.AddTransient<IUnitOfWork, UnitOfWork>(); // Not sure if this is necessary
+            //services.AddTransient<IUnitOfWork, UnitOfWork>(); // This is NOT necessary
 
             // Dependency injection - Internal Services
             services.AddTransient<IConfigService, ConfigService>();
@@ -94,13 +94,11 @@ namespace WebApi
             services.AddTransient<IUowFactory, UowFactory>();
 
             // Dependency injection - Internal Services - Mappers
-            services.AddTransient<IExampleServiceMapper, ExampleServiceMapper>();
             services.AddTransient<ITestServiceMapper, TestServiceMapper>();
-            services.AddTransient<IConfigServiceMapper, ConfigServiceMapper>();
+            services.AddTransient<IAppSettingsServiceMapper, AppSettingsServiceMapper>();
             
             // Dependency injection - Logging
             services.AddTransient<ILoggerService, LoggerService>();
-            
 
             // **** appsettings.json END **********************************************************************
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace HC.Template.Infrastructure
+namespace HC.Template.Infrastructure.Logging
 {
     public class LoggerService : ILoggerService
     {

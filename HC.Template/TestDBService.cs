@@ -1,11 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using HC.Template.Factories;
-using HC.Template.Factories.Contracts;
-using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
+﻿using HC.Template.Factories.Contracts;
 using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels.TestServiceModels;
 using HC.Template.InternalServices.Mappers.Contracts;
+using System.Threading.Tasks;
 
 namespace HC.Template.Service
 {
@@ -37,7 +34,7 @@ namespace HC.Template.Service
             using (var uow = _uowFactory.GetUnitOfWork())
             {
 
-                var response = await uow.TestRepo.GetStoredProcRecord(request.Parameter1, request.Parameter2);
+                var response = await uow.TestRepo.GetStoredProcRecord(request.SupportRepId, request.Country);
                 var commitSuccess = uow.Commit();
 
                 var result = _mapper.MapGetStoredProcData(response);

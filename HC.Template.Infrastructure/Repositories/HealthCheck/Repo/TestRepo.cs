@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Threading.Tasks;
-using HC.Template.Domain.Models;
+﻿using HC.Template.Domain.Models;
 using HC.Template.Infrastructure.Adapters;
 using HC.Template.Infrastructure.Base;
 using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
+using System;
 
 namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
 {
@@ -35,19 +36,19 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
             return response;
         }
 
-        public async Task<IEnumerable<TestObj2>> GetStoredProcRecord(int Param1, bool Param2)
+        public async Task<IEnumerable<TestObj2>> GetStoredProcRecord(int supportRepId, string country)
         {
-            var sqlStoredProc = "hc_test_stored_procedure"; // find this stored proc inside this project: Infrastructure => Assets => Stored Procedures => hc_test_stored_procedure.sql
+            var sqlStoredProc = "sp_get_Customer"; // find this stored proc inside this project: Infrastructure => Assets => Database => 02. STORED PROCEDURES [TestDB].sql
 
             var response = await DapperRepo.GetFromStoredProc<TestObj2>
                    (storedProcedureName: sqlStoredProc,
                                               parameters: new
                                               {
-                                                 Parameter1 = Param1,
-                                                 Parameter2 = Param2
+                                                  SupportRepId = supportRepId,
+                                                  Country = country
                                               },
 
-                    dbconnectionString: DefaultConnectionString, //_connectionSettings.Conn1,
+                    dbconnectionString: DefaultConnectionString,
                     sqltimeout: DefaultTimeOut,
                     dbconnection: _connection,
                     dbtransaction: _transaction)
@@ -55,6 +56,13 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
 
             return response;
 
+        }
+
+        public Task<IEnumerable<TestObj3>> InsertTestRecord(string ArtistName)
+        {
+            var sqlStoredProc = "sp_insert_Artist";
+
+            throw new NotImplementedException();
         }
     }
 }

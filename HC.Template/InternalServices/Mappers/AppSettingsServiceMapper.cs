@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace HC.Template.InternalServices.Mappers
 {
-    public class ConfigServiceMapper : IConfigServiceMapper
+    public class AppSettingsServiceMapper : IAppSettingsServiceMapper
     {
         public AppTitleResponse MapApplicationTitle(AppSettings appSettings)
         {
@@ -59,7 +59,14 @@ namespace HC.Template.InternalServices.Mappers
 
         public ConfigSettingsResponse MapConfigSettings(ConfigSettings configSettings)
         {
-            throw new NotImplementedException();
+            var result = new ConfigSettingsResponse()
+            {
+                BoolSetting = configSettings.SettingBool,
+                IntSetting = configSettings.SettingInt,
+                StrSetting = configSettings.SettingStr
+            };
+
+            return result;
         }
 
         public DictSettingResponse MapDictionarySetting(AppSettings appSettings)

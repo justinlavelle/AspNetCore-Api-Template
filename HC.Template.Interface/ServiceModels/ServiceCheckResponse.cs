@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HC.Template.Interface.ServiceModels
+﻿namespace HC.Template.Interface
 {
     class ServiceCheckResponse
     {

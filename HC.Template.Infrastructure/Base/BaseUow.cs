@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using HC.Template.Infrastructure.ConfigModels;
-using Microsoft.Extensions.Configuration;
+﻿using HC.Template.Infrastructure.ConfigModels;
 
 namespace HC.Template.Infrastructure.Base
 {

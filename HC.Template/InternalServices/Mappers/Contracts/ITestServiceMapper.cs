@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using HC.Template.Domain.Models;
+﻿using HC.Template.Domain.Models;
 using HC.Template.Interface.ServiceModels.TestServiceModels;
+using System.Collections.Generic;
 
 namespace HC.Template.InternalServices.Mappers.Contracts
 {

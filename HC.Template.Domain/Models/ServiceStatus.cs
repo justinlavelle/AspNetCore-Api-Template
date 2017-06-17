@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HC.Template.Domain.Models
+﻿namespace HC.Template.Domain.Models
 {
     /// <summary>
     /// ServiceStatus to hold the response. 

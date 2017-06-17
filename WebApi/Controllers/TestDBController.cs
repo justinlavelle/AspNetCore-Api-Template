@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels.TestServiceModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HC.Template.WebApi.Controllers
 {

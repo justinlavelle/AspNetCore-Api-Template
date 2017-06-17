@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HC.Template.Infrastructure.ConfigModels
+﻿namespace HC.Template.Infrastructure.ConfigModels
 {
     public class ConnectionStrings
     {
