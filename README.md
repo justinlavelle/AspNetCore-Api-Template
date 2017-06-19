@@ -96,11 +96,34 @@ could be abstracted out into a completely separate project('s) ideally.
 
 Here we have the *usual suspects* found at the root level.
 
-- `HC.Template`         - configuration file implemented through Options pattern
-- `HC.Domain`           - configuration file implemented through Options pattern
-- `HC.Infrastructure`   - configuration file implemented through Options pattern
-- `HC.Interface`        - configuration file implemented through Options pattern
-- `HC.WebAPI`           - configuration file implemented through Options pattern
+- `HC.Template`                  - Service/Business Logic Layer
+  - [Factories]                  - Currently used to build up a Unit of Work 
+  - [Internal Services]          - These are services that are for use by other services and not intended to be exposed to outside consumer.
+  - (ServiceName).cs             - These classes are the services that are available for consumption [by api and external consumer]
+                                 
+- `HC.Domain`                    - Contains Domain Objects intended to be used within the domain.
+  - [Enums]                      - :)
+  - [Models]                     - :)
+                                 
+- `HC.Infrastructure`            - Technology/Data Layer
+  - [Adapters]                   - Static classes that perform functionality.
+  - [Assets]                     - Contains database scripts [Create + Stored Procedures]
+  - [Base]                       - Base Classes
+  - [Config Models]              - Models that represent the strongly typed version of the appsettings.json
+  - [Factories]                  - HttpClientFactory
+  - [Logging]                    - Implementation of a logger service to allow logging with GrayLogging
+  - [Repositories]               - Makes Database connections and connects to external APIs
+  - [UOWs]                       - Unit of Work Implementation [Uows are used for creating transactions]
+                                 
+- `HC.Interface`                 - Interface between Web Api & Service Layers. The 'public' Language.
+  - [Contracts]                  - Interfaces used in service/business logic layer for services meant to be consumed.
+  - [ServiceModels]              - Response and Request models for services meant to be consumed.
+                                 
+- `HC.WebAPI`                    - Web Api to be consumed
+  - [Controllers]                - Access to service methods from AppSettings, CryptoCoin, TestDB services.
+  - [Middleware]                 - Exception handling middleware
+  - [wwwroot]                    - To store deployable package/files
+  - Startup.cs                   - This runs before anything else. Here is where interfaces are bound for Dependecy Injection (DI) purposes
 
 - `appsettings.json`             - configuration file implemented through Options pattern. Replaces traditional App.config/Web.config
 - `appsettings.Development.json` - configuration file implemented through Options pattern
@@ -108,7 +131,7 @@ Here we have the *usual suspects* found at the root level.
 
 - `nlog.config`         - configuration file necessary for implementing Nlog/Gray Logging
 
-*** The service will use `appsettings.json` and one of 'Development' or 'Production' depending on the [env.EnvironmentName]
+NOTE: The service will use `appsettings.json` and one of 'Development' or 'Production' depending on the [env.EnvironmentName]
 
 ----
  
