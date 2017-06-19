@@ -37,15 +37,15 @@ This utilizes standards/patterns/practices such as Dependency injection, Multi-t
   - Projects are structured to de-couple technology from the business logic
   - Configuration [appsettings.json] is integrated via "Options" Pattern with a configuration service
 
-  - **Swagger**
+- **Swagger**
   - Api Documentation
   - Easy Web Api Methods access for testing
 
-  - **Logging** [Implementation available but not used]
+- **Logging** [Implementation available but not used]
   - Remote Logging
   - Using Gray Logging [replace serverUrl="http://graylog.xxxxx.co.za:12XXX/gelf" with appropriate address]
 
-  - **Exception Handling Middleware**
+- **Exception Handling Middleware**
   - No need for pesky Try...Catch blocks 
   - ... at least wrt catching system errors. Still need to use them for throwing application exceptions ;)
 
