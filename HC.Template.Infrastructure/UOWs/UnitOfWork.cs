@@ -6,6 +6,8 @@ using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Repo;
 using HC.Template.Infrastructure.UOWs.Contracts;
+using HC.Template.Infrastructure.Repositories.CryptoCurrency.Contracts;
+using HC.Template.Infrastructure.Repositories.CryptoCurrency.Repo;
 
 namespace HC.Template.Infrastructure.UOWs
 {
@@ -15,6 +17,8 @@ namespace HC.Template.Infrastructure.UOWs
         private IDbTransaction _transaction;
 
         private ITestRepo _testRepo;
+        //private IDBCheckRepo _dbCheckRepo;
+        //private IStatusCheckRepo _statusCheckRepo;
 
         private bool _disposed;
         private ConnectionStrings _connectionSettings;

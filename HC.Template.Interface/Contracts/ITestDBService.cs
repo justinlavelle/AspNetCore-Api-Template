@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace HC.Template.Interface.Contracts
 {
-    public interface ITestDBService
+    public interface ITestDBService //Don't forget to add to Startup.cs for DI
     {
         Task<TestObj1Response> GetDynamicSqlData();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using HC.Template.Infrastructure.Repositories.HealthCheck.Contracts;
+using HC.Template.Infrastructure.Repositories.CryptoCurrency.Contracts;
 
 namespace HC.Template.Infrastructure.UOWs.Contracts
 {

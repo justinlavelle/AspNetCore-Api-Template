@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HC.Template.Infrastructure.Base
+namespace HC.Template.Infrastructure.Adapters
 {
-    public class Settings
+    class HttpClientRepo
     {
-
     }
 }

@@ -2,7 +2,7 @@ using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HC.Template.WebApi.Controllers
+namespace HC.Template.WebApi.Controllers // NB REMEMBER: This controller must be removed because you don't want to expose these to an external consumer.
 {
     [Produces("application/json")]
     [Route("api/AppSettings")]
@@ -76,6 +76,14 @@ namespace HC.Template.WebApi.Controllers
         public ConfigSettingsResponse GetAppSettingsConfigSettings()
         {
             var response = _appSettingService.GetConfigSettings();
+            return response;
+        }
+
+        [HttpGet]
+        [Route("GetServiceEndpoints")]
+        public ServiceEndpointsResponse GetServiceEndpoints()
+        {
+            var response = _appSettingService.GetServiceEndpoints();
             return response;
         }
     }

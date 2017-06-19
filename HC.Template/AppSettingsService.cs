@@ -1,4 +1,4 @@
-﻿using HC.Template.Infrastructure.Logging;
+﻿using HC.Template.Infrastructure.Logging.Contracts;
 using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
 using HC.Template.InternalServices.ConfigurationService.Contracts;
@@ -6,8 +6,11 @@ using HC.Template.InternalServices.Mappers.Contracts;
 
 namespace HC.Template.Service
 {
-    public class AppSettingsService : IAppSettingsService
+    public class AppSettingsService : IAppSettingsService 
     {
+        // NB REMEMBER: This 'service' is only here to show that settings can be exposed. But we don't want to do that for a normal service.
+        // In order to use app settings, make use of the internal 'ConfigService'
+
         //AppSettings _appSettings;
         private IConfigService _config;
         private IAppSettingsServiceMapper _mapper;
@@ -74,5 +77,15 @@ namespace HC.Template.Service
             var response = _config.GetConfigSettings();
             return response;
         }
+
+        public ServiceEndpointsResponse GetServiceEndpoints()
+        {
+            // _loggerService.LogDebug("This is a debug message");
+            // _loggerService.LogInformation("This is an information message");
+
+            var response = _config.GetServiceEndpoints();
+            return response;
+        }
+
     }
 }

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HC.Template.InternalServices.Mappers
+namespace HC.Template.InternalServices.Mappers // Internal services are never meant to be exposed to an external consumer. Hence Internal services
 {
     public class AppSettingsServiceMapper : IAppSettingsServiceMapper
     {
@@ -26,7 +26,7 @@ namespace HC.Template.InternalServices.Mappers
                 AppSettingVals = new AppSettingsVals()
                 {
                     ApplicationTitle = appSettings.ApplicationTitle,
-                    Dict = new Dictionary<string, InnerClassVals>(),
+                    Dict = new Dictionary<string, DictionaryVals>(),
                     EnumSwitchVal = (EnumSwitch) Convert.ToInt32(appSettings.AnEnumSwitch),
                     IntSetting = appSettings.IntSetting,
                     StringSetting = appSettings.StringSetting
@@ -43,9 +43,9 @@ namespace HC.Template.InternalServices.Mappers
             result.AppSettingVals.ListOfValues = stringList.AsEnumerable();
 
             // Mapping a dictionary - which is a generic collection
-            foreach (var dictEntry in appSettings.DictSetting)
+            foreach (var dictEntry in appSettings.DictionarySettings)
             {
-                var innerClassVal = new InnerClassVals()
+                var innerClassVal = new DictionaryVals()
                 {
                     IsEnabled = dictEntry.Value.IsEnabled,
                     Name = dictEntry.Value.Name
@@ -76,15 +76,15 @@ namespace HC.Template.InternalServices.Mappers
                 DictionaryValues = new Dictionary<string, InnerClass>()
             };
 
-            foreach (var dictEntry in appSettings.DictSetting)
+            foreach (var dictEntry in appSettings.DictionarySettings)
             {
-                var innerClassVal = new InnerClass()
+                var value = new InnerClass()
                 {
                     IsEnabled = dictEntry.Value.IsEnabled,
                     Name = dictEntry.Value.Name
                 };
 
-                result.DictionaryValues.Add(dictEntry.Key, innerClassVal);
+                result.DictionaryValues.Add(dictEntry.Key, value);
             }
 
             return result;
@@ -123,6 +123,26 @@ namespace HC.Template.InternalServices.Mappers
             {
                 ListOfStrings = stringList.AsEnumerable()
             };
+
+            return result;
+        }
+
+        public ServiceEndpointsResponse MapServiceEndpoints(ServicesEndpoints serviceEndpoints)
+        {
+            var result = new ServiceEndpointsResponse()
+            {
+                ServiceEndPoints = new Dictionary<string, ServiceEndpointAttributes>()
+            };
+
+            foreach (var serviceEntry in serviceEndpoints.Services)
+            {
+                var value = new ServiceEndpointAttributes()
+                {
+                     Url = serviceEntry.Value.Url
+                };
+
+                result.ServiceEndPoints.Add(serviceEntry.Key, value);
+            }
 
             return result;
         }

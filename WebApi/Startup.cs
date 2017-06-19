@@ -1,7 +1,11 @@
 ﻿using HC.Template.Factories;
 using HC.Template.Factories.Contracts;
 using HC.Template.Infrastructure.ConfigModels;
+using HC.Template.Infrastructure.Factories;
 using HC.Template.Infrastructure.Logging;
+using HC.Template.Infrastructure.Logging.Contracts;
+using HC.Template.Infrastructure.Repositories.CryptoCurrency.Contracts;
+using HC.Template.Infrastructure.Repositories.CryptoCurrency.Repo;
 using HC.Template.Interface.Contracts;
 using HC.Template.InternalServices.ConfigurationService;
 using HC.Template.InternalServices.ConfigurationService.Contracts;
@@ -27,7 +31,7 @@ namespace WebApi
             env.ConfigureNLog("nlog.config");
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true) // Reload means that the service may make use of changed values without restarting the service.
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
@@ -65,29 +69,34 @@ namespace WebApi
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.Configure<ConfigSettings>(Configuration.GetSection("ConfigSettings"));
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
-            services.Configure<ExternalServices>(Configuration.GetSection("ExternalServices"));
+            services.Configure<ServicesEndpoints>(Configuration.GetSection("ServicesEndpoints"));
 
+            // Required to make config object values available without having to implement IOptionsSnapshot in every service/repo
             services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<AppSettings>>().Value);
             services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<ConfigSettings>>().Value);
             services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<ConnectionStrings>>().Value);
-            services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<ExternalServices>>().Value);
+            services.AddScoped(cfg => cfg.GetService<IOptionsSnapshot<ServicesEndpoints>>().Value);
 
             // *If* you need access to generic IConfiguration this is **required**
             services.AddSingleton(Configuration);   // IConfigurationRoot
             services.AddSingleton<IConfiguration>(Configuration);   // IConfiguration explicitly
 
-            // Dependency injection for our repos and services [i.e. Data Layer to Core/logic Layer]
+            // Dependency injection for our repos and services [i.e. Data Layer to Core/logic/service Layer]
 
-            // Dependency injection - 'Core' Services
+            // Dependency injection - 'Repo' Repositories ----------------------------------------------------------------------
+              // services.AddTransient<IUnitOfWork, UnitOfWork>(); // This is NOT necessary as UowFactory creates new instance
+              // services.AddTransient<ITestRepo, TestRepo>(); // Removed because Unit of Work creates an instance of this.
+            services.AddTransient<ICryptoRepo, CryptoRepo>();
+
+            // Singleton because Httpclient instance must be used and re-used according to industry standards.
+            services.AddSingleton<HttpClientFactory>();
+
+            // Dependency injection - 'Core' Services -------------------------------------------------------------------------
             services.AddTransient<IAppSettingsService, AppSettingsService>();
             services.AddTransient<ITestDBService, TestDBService>();
+            services.AddTransient<ICryptoCoinService, CryptoCoinService>();
 
-            // Dependency injection - 'Repo' Repositories
-            // services.AddTransient<ITestRepo, TestRepo>(); // Removed because Unit of Work creates an instance of this.
-
-            //services.AddTransient<IUnitOfWork, UnitOfWork>(); // This is NOT necessary
-
-            // Dependency injection - Internal Services
+            // Dependency injection - Internal Services 
             services.AddTransient<IConfigService, ConfigService>();
 
             // Dependency injection - Internal Services - Factories
@@ -96,8 +105,9 @@ namespace WebApi
             // Dependency injection - Internal Services - Mappers
             services.AddTransient<ITestServiceMapper, TestServiceMapper>();
             services.AddTransient<IAppSettingsServiceMapper, AppSettingsServiceMapper>();
-            
-            // Dependency injection - Logging
+            services.AddTransient<ICryptoCoinMapper, CryptoCoinMapper>();
+
+            // Dependency injection - Logging --------------------------------------------------------------------------------
             services.AddTransient<ILoggerService, LoggerService>();
 
             // **** appsettings.json END **********************************************************************
@@ -132,7 +142,7 @@ namespace WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HC.Template Web API V1");
             });
         }
 

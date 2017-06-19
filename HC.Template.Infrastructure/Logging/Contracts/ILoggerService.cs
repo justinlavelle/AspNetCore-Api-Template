@@ -1,4 +1,4 @@
-﻿namespace HC.Template.Infrastructure.Logging
+﻿namespace HC.Template.Infrastructure.Logging.Contracts
 {
     public interface ILoggerService
     {

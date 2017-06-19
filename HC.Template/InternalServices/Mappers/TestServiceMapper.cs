@@ -4,7 +4,7 @@ using HC.Template.InternalServices.Mappers.Contracts;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HC.Template.InternalServices.Mappers
+namespace HC.Template.InternalServices.Mappers // Internal services are never meant to be exposed to an external consumer. Hence Internal services
 {
     public class TestServiceMapper: ITestServiceMapper
     {

@@ -2,7 +2,7 @@
 
 namespace HC.Template.Interface.Contracts
 {
-    public interface IAppSettingsService
+    public interface IAppSettingsService // This must be removed eventually as you do not want to expose this to the outside world
     {
         AppTitleResponse GetApplicationTitle();
         StringSettingResponse GetStringSetting();
@@ -13,5 +13,6 @@ namespace HC.Template.Interface.Contracts
 
         AppSettingsResponse GetApplicationSettings();
         ConfigSettingsResponse GetConfigSettings();
+        ServiceEndpointsResponse GetServiceEndpoints();
     }
 }

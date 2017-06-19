@@ -12,13 +12,13 @@ namespace HC.Template.Interface.ServiceModels.ConfigurationServiceModels
         public string ApplicationTitle { get; set; }
         public string StringSetting { get; set; }
         public int IntSetting { get; set; }
-        public Dictionary<string, InnerClassVals> Dict { get; set; } // Dictionaries must have string keys
+        public Dictionary<string, DictionaryVals> Dict { get; set; } // Dictionaries must have string keys
         public IEnumerable<string> ListOfValues { get; set; }
         public EnumSwitch EnumSwitchVal { get; set; }
 
     }
 
-    public class InnerClassVals
+    public class DictionaryVals
     {
         public string Name { get; set; }
         public bool IsEnabled { get; set; } = true;

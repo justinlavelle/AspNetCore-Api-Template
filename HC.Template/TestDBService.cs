@@ -17,6 +17,10 @@ namespace HC.Template.Service
             _uowFactory = uowFactory;
         }
 
+        /// <summary>
+        /// Gets data based on Dynamic Sql
+        /// </summary>
+        /// <returns></returns>
         public async Task<TestObj1Response> GetDynamicSqlData()
         {
             using (var uow = _uowFactory.GetUnitOfWork())
@@ -29,6 +33,11 @@ namespace HC.Template.Service
             }
         }
 
+        /// <summary>
+        /// Gets data from a stored procedure
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public async Task<TestObj2Response> GetStoredProcData(TestObj2Request request)
         {
             using (var uow = _uowFactory.GetUnitOfWork())

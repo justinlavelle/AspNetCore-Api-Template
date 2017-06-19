@@ -11,15 +11,18 @@ namespace HC.Template.InternalServices.ConfigurationService
     {
         private IConfiguration _config;
         private IAppSettingsServiceMapper _mapper;
+
         protected AppSettings _appSettings { get; }
         protected ConfigSettings _configSettings { get; }
-        protected ConnectionStrings _connStrings { get; }
+        protected ServicesEndpoints _servicesEndpoints { get; }
+        //protected ConnectionStrings _connStrings { get; }
 
-        public ConfigService(IConfiguration config, AppSettings appSettings, ConfigSettings configSettings, IAppSettingsServiceMapper mapper, ConnectionStrings _connStrings)
+        public ConfigService(IConfiguration config, AppSettings appSettings, ConfigSettings configSettings, ServicesEndpoints servicesEndpoints, IAppSettingsServiceMapper mapper)//, ConnectionStrings _connStrings)
         {
             _config = config;
             _appSettings = appSettings;
             _configSettings = configSettings;
+            _servicesEndpoints = servicesEndpoints;
             _mapper = mapper;
         }
 
@@ -76,6 +79,13 @@ namespace HC.Template.InternalServices.ConfigurationService
         {
             var response = _configSettings;//_config.GetSection("ConfigSettings") as ConfigSettings;
             var result = _mapper.MapConfigSettings(response);
+            return result;
+        }
+
+        public ServiceEndpointsResponse GetServiceEndpoints()
+        {
+            var response = _servicesEndpoints;//_config.GetSection("_servicesEndpoints") as ConfigSettings;
+            var result = _mapper.MapServiceEndpoints(response);
             return result;
         }
 

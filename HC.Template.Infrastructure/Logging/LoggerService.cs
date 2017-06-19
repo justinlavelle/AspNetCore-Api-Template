@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using HC.Template.Infrastructure.Logging.Contracts;
+using Microsoft.Extensions.Logging;
 
 namespace HC.Template.Infrastructure.Logging
 {

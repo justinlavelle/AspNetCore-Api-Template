@@ -14,7 +14,7 @@ go
 
 create procedure sp_get_Customer
        @SupportRepId  int,
-       @Country       varchar(150)
+       @Country       varchar(40)
 as
   set nocount on
 
