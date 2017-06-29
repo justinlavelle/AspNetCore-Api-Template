@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HC.Template.Infrastructure.Factories.Contracts;
+using System;
 using System.Collections.Concurrent;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
 namespace HC.Template.Infrastructure.Factories
 {
-    public sealed class HttpClientFactory : IDisposable    // Register as singleton
+    public sealed class HttpClientFactory: IHttpClientFactory    // Register as singleton
     {
         private readonly ConcurrentDictionary<Uri, HttpClient> _httpClients;
 
@@ -14,9 +15,9 @@ namespace HC.Template.Infrastructure.Factories
             _httpClients = new ConcurrentDictionary<Uri, HttpClient>();
         }
 
-        public HttpClient Create(Uri baseAddress)
+        public HttpClient Create(string baseAddress)
         {
-            var client = _httpClients.GetOrAdd(baseAddress,
+            var client = _httpClients.GetOrAdd(new Uri(baseAddress),
                 b => new HttpClient { BaseAddress = b });
 
             client.DefaultRequestHeaders.Accept.Clear();

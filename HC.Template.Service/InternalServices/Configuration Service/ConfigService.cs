@@ -1,11 +1,10 @@
-﻿using System;
-using HC.Template.Infrastructure.ConfigModels;
+﻿using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
-using HC.Template.InternalServices.ConfigurationService.Contracts;
-using HC.Template.InternalServices.Mappers.Contracts;
+using HC.Template.Service.InternalServices.ConfigurationService.Contracts;
+using HC.Template.Service.InternalServices.Mappers.Contracts;
 using Microsoft.Extensions.Configuration;
 
-namespace HC.Template.InternalServices.ConfigurationService
+namespace HC.Template.Service.InternalServices.ConfigurationService
 {
     public class ConfigService : IConfigService
     {

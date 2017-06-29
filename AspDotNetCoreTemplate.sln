@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Template.WebApi", "WebApi\HC.Template.WebApi.csproj", "{075092AD-3483-475B-A041-F4B0FAA077BD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Template", "HC.Template\HC.Template.csproj", "{4942333D-0415-4AEA-AAC3-0B65F7687E6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Template.Service", "HC.Template.Service\HC.Template.Service.csproj", "{4942333D-0415-4AEA-AAC3-0B65F7687E6A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HC.Template.Domain", "HC.Template.Domain\HC.Template.Domain.csproj", "{245F48BB-74CA-43B0-B02D-2AD6CFA026B1}"
 EndProject

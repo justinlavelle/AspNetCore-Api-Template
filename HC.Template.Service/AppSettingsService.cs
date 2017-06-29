@@ -1,8 +1,8 @@
 ﻿using HC.Template.Infrastructure.Logging.Contracts;
 using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
-using HC.Template.InternalServices.ConfigurationService.Contracts;
-using HC.Template.InternalServices.Mappers.Contracts;
+using HC.Template.Service.InternalServices.ConfigurationService.Contracts;
+using HC.Template.Service.InternalServices.Mappers.Contracts;
 
 namespace HC.Template.Service
 {

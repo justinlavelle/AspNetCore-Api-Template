@@ -3,7 +3,7 @@ using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.UOWs;
 using HC.Template.Infrastructure.UOWs.Contracts;
 
-namespace HC.Template.Factories
+namespace HC.Template.Service.Factories
 {
     public class UowFactory: IUowFactory
     {

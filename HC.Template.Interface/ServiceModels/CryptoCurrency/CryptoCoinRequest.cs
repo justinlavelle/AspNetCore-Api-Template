@@ -6,7 +6,7 @@ namespace HC.Template.Interface.ServiceModels.CryptoCurrency
     {
         [JsonProperty("limit")]
         public int Limit { get; set; }
-        [JsonProperty("convert")]
-        public string Convert { get; set; }
+        //[JsonProperty("convert")]
+        //public string Convert { get; set; }
     }
 }

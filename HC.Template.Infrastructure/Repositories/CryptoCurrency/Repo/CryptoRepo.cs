@@ -2,13 +2,12 @@
 using HC.Template.Infrastructure.Base;
 using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.Factories;
+using HC.Template.Infrastructure.Factories.Contracts;
 using HC.Template.Infrastructure.Repositories.CryptoCurrency.Contracts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HC.Template.Infrastructure.Repositories.CryptoCurrency.Repo
@@ -16,32 +15,31 @@ namespace HC.Template.Infrastructure.Repositories.CryptoCurrency.Repo
     public class CryptoRepo: BaseRepo, ICryptoRepo
     {
         protected ServicesEndpoints _serviceEndpoints { get; }
-        protected AppSettings _appSettings { get; }
-        private readonly HttpClientFactory _httpClientFactory;
+        
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public CryptoRepo(HttpClientFactory httpClientFactory, ServicesEndpoints serviceEndpoints, ConnectionStrings connectionStrings) : base(connectionStrings)
+        public CryptoRepo(IHttpClientFactory httpClientFactory, ServicesEndpoints serviceEndpoints, ConnectionStrings connectionStrings) : base(connectionStrings)
         {
             _httpClientFactory = httpClientFactory;
             _serviceEndpoints = serviceEndpoints;
         }
 
-        public async Task<CoinCapResponse> GetCoinCapData(CoinCapRequest coinCapRequest)
+        public CoinCapResponse GetCoinCapData(CoinCapRequest coinCapRequest)
         {
             var serviceUrl = _serviceEndpoints.Services["CryptoCoinService"].Url;
-
-            var baseAddress = new Uri(serviceUrl);
-            var httpClient = _httpClientFactory.Create(baseAddress);
+            var httpClient = _httpClientFactory.Create(serviceUrl);
 
             //var stringContent = new StringContent(JsonConvert.SerializeObject(coinCapRequest), Encoding.UTF8, "application/json");
             //var response = await httpClient.PostAsync(baseAddress, stringContent);
 
+            var baseAddress = new Uri(serviceUrl);
             UriBuilder serviceUri = new UriBuilder(baseAddress);
             serviceUri.Query = "limit=" + coinCapRequest.Limit + "&convert="+ coinCapRequest.Convert;
 
-            var response = await httpClient.GetAsync(serviceUri.Uri);
+            var response = httpClient.GetAsync(serviceUri.Uri).Result;
             if (response.IsSuccessStatusCode)
             {
-                var responseData = await response.Content.ReadAsStringAsync();
+                var responseData = response.Content.ReadAsStringAsync().Result;
 
                 var dataList = JsonConvert.DeserializeObject<List<CapCoinInfo>>(responseData);
                 var result = new CoinCapResponse();
@@ -51,16 +49,6 @@ namespace HC.Template.Infrastructure.Repositories.CryptoCurrency.Repo
             }
 
             return new CoinCapResponse();
-        }
-
-        public async Task<CoinCapResponse> GetCoinCapDataLimit(CoinCapRequest coinCapRequest)
-        {
-            var baseAddress = new Uri(_serviceEndpoints.Services["CryptoCoinService"].Url);
-            var httpClient = _httpClientFactory.Create(baseAddress);
-
-            var response = new CoinCapResponse();
-
-            return response;
         }
     }
 }

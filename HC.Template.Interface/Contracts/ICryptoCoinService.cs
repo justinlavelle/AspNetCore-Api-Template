@@ -5,7 +5,6 @@ namespace HC.Template.Interface.Contracts //Don't forget to add to Startup.cs fo
 {
     public interface ICryptoCoinService
     {
-        Task<CryptoCoinResponse> GetCoinMarketCapByAll(CryptoCoinRequest request);
-        Task<CryptoCoinResponse> GetCoinMarketCapByLimit(CryptoCoinRequest request);
+        CryptoCoinResponse GetCoinMarketCapByLimit(CryptoCoinRequest request);
     }
 }

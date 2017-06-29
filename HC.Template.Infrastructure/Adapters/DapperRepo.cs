@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 
 namespace HC.Template.Infrastructure.Adapters
 {
-    public class DapperRepo
+    public static class DapperRepo
     {
         private static IDbConnection OpenDBConnection(
             string connectionString = null,
@@ -24,7 +23,7 @@ namespace HC.Template.Infrastructure.Adapters
             }
 
             // Connection Pooling enabled by default, MARS (Multiple active record sets) not enabled           
-            return new SqlConnection(connectionString);
+            return new SqlConnection(connectionString); // Only if a connection object is not provided.
         }
 
         private static int GetSqlTimeOut(int? timeout = null)
@@ -32,7 +31,7 @@ namespace HC.Template.Infrastructure.Adapters
             return timeout.Value;
         }
 
-        public static async Task<IEnumerable<T>> GetFromStoredProc<T>(
+        public static IEnumerable<T> GetFromStoredProc<T>(
             string storedProcedureName,
             object parameters = null,
             string dbconnectionString = null,
@@ -41,17 +40,17 @@ namespace HC.Template.Infrastructure.Adapters
             IDbTransaction dbtransaction = null)
         {
             var connection = OpenDBConnection(dbconnectionString, dbconnection);
-            return await connection.QueryAsync<T>
+            return connection.Query<T>
             (
                 sql: storedProcedureName,
                 param: parameters,
                 commandType: CommandType.StoredProcedure,
                 transaction: dbtransaction,
                 commandTimeout: GetSqlTimeOut(sqltimeout)
-            ).ConfigureAwait(false);
+            );
         }
 
-        public static async Task<int> ExecuteAsStoredProc(
+        public static int ExecuteAsStoredProc(
             string storedProcedureName,
             object parameters = null,
             string dbconnectionString = null,
@@ -63,19 +62,19 @@ namespace HC.Template.Infrastructure.Adapters
             p.Add("@ReturnValue", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
 
             var connection = OpenDBConnection(dbconnectionString, dbconnection);
-            await connection.ExecuteAsync
+             connection.Execute
             (
                 sql: storedProcedureName,
                 param: p,
                 commandType: CommandType.StoredProcedure,
                 transaction: dbtransaction,
                 commandTimeout: GetSqlTimeOut(sqltimeout)
-            ).ConfigureAwait(false);
+            );
 
             return p.Get<int>("@ReturnValue");
         }
 
-        public static async Task<Dictionary<string, object>> ExecuteAsStoredProcWithOutput(
+        public static Dictionary<string, object> ExecuteAsStoredProcWithOutput(
                 string storedProcedureName,
                 object inputParameters = null,
                 IEnumerable<string> outputParameters = null,
@@ -95,14 +94,14 @@ namespace HC.Template.Infrastructure.Adapters
             p.Add("@ReturnValue", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
 
             var connection = OpenDBConnection(dbconnectionString, dbconnection);
-            await connection.ExecuteAsync
+            connection.Execute
             (
                 sql: storedProcedureName,
                 param: p,
                 commandType: CommandType.StoredProcedure,
                 transaction: dbtransaction,
                 commandTimeout: GetSqlTimeOut(sqltimeout)
-            ).ConfigureAwait(false);
+            );
 
             // add values from output parameters to dictionary
             Dictionary<string, object> returnOutputParameter = new Dictionary<string, object>();
@@ -115,7 +114,7 @@ namespace HC.Template.Infrastructure.Adapters
             return returnOutputParameter;
         }
 
-        public static async Task<IEnumerable<T>> ExecuteDynamicSql<T>(
+        public static IEnumerable<T> ExecuteDynamicSql<T>(
                 string sql,
                 string dbconnectionString = null,
                 IDbConnection dbconnection = null,
@@ -123,13 +122,13 @@ namespace HC.Template.Infrastructure.Adapters
                 IDbTransaction dbtransaction = null)
         {
             var connection = OpenDBConnection(dbconnectionString, dbconnection);
-            return await connection.QueryAsync<T>
+            return connection.Query<T>
             (
                 sql: sql,
                 commandType: CommandType.Text,
                 transaction: dbtransaction,
                 commandTimeout: GetSqlTimeOut(sqltimeout)
-            ).ConfigureAwait(false);
+            );
         }
     }
 }
