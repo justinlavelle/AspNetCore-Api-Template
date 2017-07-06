@@ -1,8 +1,7 @@
 ﻿using HC.Template.Factories.Contracts;
 using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels.TestServiceModels;
-using HC.Template.InternalServices.Mappers.Contracts;
-using System.Threading.Tasks;
+using HC.Template.Service.InternalServices.Mappers.Contracts;
 
 namespace HC.Template.Service
 {
@@ -21,11 +20,11 @@ namespace HC.Template.Service
         /// Gets data based on Dynamic Sql
         /// </summary>
         /// <returns></returns>
-        public async Task<TestObj1Response> GetDynamicSqlData()
+        public TestObj1Response GetDynamicSqlData()
         {
             using (var uow = _uowFactory.GetUnitOfWork())
             {
-                var response = await uow.TestRepo.GetDynamicSqlRecord();
+                var response = uow.TestRepo.GetDynamicSqlRecord();
                 var commitSuccess = uow.Commit();
 
                 var result = _mapper.MapGetDynamicSqlData(response);
@@ -38,12 +37,12 @@ namespace HC.Template.Service
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<TestObj2Response> GetStoredProcData(TestObj2Request request)
+        public TestObj2Response GetStoredProcData(TestObj2Request request)
         {
             using (var uow = _uowFactory.GetUnitOfWork())
             {
 
-                var response = await uow.TestRepo.GetStoredProcRecord(request.SupportRepId, request.Country);
+                var response = uow.TestRepo.GetStoredProcRecord(request.SupportRepId, request.Country);
                 var commitSuccess = uow.Commit();
 
                 var result = _mapper.MapGetStoredProcData(response);

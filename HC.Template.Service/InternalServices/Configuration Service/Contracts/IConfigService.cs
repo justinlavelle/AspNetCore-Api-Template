@@ -1,6 +1,6 @@
 ﻿using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
 
-namespace HC.Template.InternalServices.ConfigurationService.Contracts
+namespace HC.Template.Service.InternalServices.ConfigurationService.Contracts
 {
     public interface IConfigService
     {

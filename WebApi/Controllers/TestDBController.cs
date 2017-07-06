@@ -18,17 +18,17 @@ namespace HC.Template.WebApi.Controllers
 
         [HttpPost]
         [Route("GetDataFromDynamicSql")]
-        public async Task<TestObj1Response> GetDataFromDynamicSql()
+        public TestObj1Response GetDataFromDynamicSql()
         {
-            var response = await _testService.GetDynamicSqlData();
+            var response = _testService.GetDynamicSqlData();
             return response;
         }
 
         [HttpPost]
         [Route("GetDataFromStoredProcedure")]
-        public async Task<TestObj2Response> GetDataFromStoredProcedure(TestObj2Request request)
+        public TestObj2Response GetDataFromStoredProcedure(TestObj2Request request)
         {
-            var response = await _testService.GetStoredProcData(request);
+            var response = _testService.GetStoredProcData(request);
             return response;
         }
 

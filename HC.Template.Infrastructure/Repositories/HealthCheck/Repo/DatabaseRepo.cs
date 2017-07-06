@@ -6,7 +6,7 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
 {
     public class DatabaseRepo : IDBCheckRepo
     {
-        public Task<string> Check()
+        public string Check()
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,7 @@
 ﻿using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Interface.ServiceModels.ConfigurationServiceModels;
 
-namespace HC.Template.InternalServices.Mappers.Contracts
+namespace HC.Template.Service.InternalServices.Mappers.Contracts
 {
     public interface IAppSettingsServiceMapper// Make sure to map this in Startup.cs for Dependency Injection (DI)
     {

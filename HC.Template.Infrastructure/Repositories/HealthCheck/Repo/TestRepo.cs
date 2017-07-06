@@ -21,26 +21,25 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
             _transaction = transaction;
         }
         
-        public async Task<IEnumerable<TestObj1>> GetDynamicSqlRecord()
+        public IEnumerable<TestObj1> GetDynamicSqlRecord()
         {
             var sqlCmd = "select 'TestField1' as 'Field1', 'TestField2' as 'Field2', 'TestField3' as 'Field3', 'TestField4' as 'Field4' ";
 
-            var response = await DapperRepo.ExecuteDynamicSql<TestObj1>(
+            var response = DapperRepo.ExecuteDynamicSql<TestObj1>(
                 sql: sqlCmd,
                 dbconnectionString: DefaultConnectionString, //_connectionSettings.Conn1,
                 sqltimeout: DefaultTimeOut,
                 dbconnection: _connection,
-                dbtransaction: _transaction)
-                .ConfigureAwait(false);
+                dbtransaction: _transaction);
 
             return response;
         }
 
-        public async Task<IEnumerable<TestObj2>> GetStoredProcRecord(int supportRepId, string country)
+        public IEnumerable<TestObj2> GetStoredProcRecord(int supportRepId, string country)
         {
             var sqlStoredProc = "sp_get_Customer"; // find this stored proc inside this project: Infrastructure => Assets => Database => 02. STORED PROCEDURES [TestDB].sql
 
-            var response = await DapperRepo.GetFromStoredProc<TestObj2>
+            var response = DapperRepo.GetFromStoredProc<TestObj2>
                    (storedProcedureName: sqlStoredProc,
                                               parameters: new
                                               {
@@ -51,14 +50,13 @@ namespace HC.Template.Infrastructure.Repositories.HealthCheck.Repo
                     dbconnectionString: DefaultConnectionString,
                     sqltimeout: DefaultTimeOut,
                     dbconnection: _connection,
-                    dbtransaction: _transaction)
-                    .ConfigureAwait(false);
+                    dbtransaction: _transaction);
 
             return response;
 
         }
 
-        public Task<IEnumerable<TestObj3>> InsertTestRecord(string ArtistName)
+        public IEnumerable<TestObj3> InsertTestRecord(string ArtistName)
         {
             var sqlStoredProc = "sp_insert_Artist";
 

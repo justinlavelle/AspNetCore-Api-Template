@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Content Include="wwwroot\Class.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.1" />
@@ -44,7 +44,11 @@
   <ItemGroup>
     <ProjectReference Include="..\HC.Template.Domain\HC.Template.Domain.csproj" />
     <ProjectReference Include="..\HC.Template.Infrastructure\HC.Template.Infrastructure.csproj" />
-    <ProjectReference Include="..\HC.Template\HC.Template.csproj" />
+    <ProjectReference Include="..\HC.Template.Interface\HC.Template.Interface.csproj" />
+    <ProjectReference Include="..\HC.Template.Service\HC.Template.Service.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

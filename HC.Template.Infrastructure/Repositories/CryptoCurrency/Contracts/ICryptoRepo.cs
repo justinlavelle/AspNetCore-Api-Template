@@ -5,7 +5,6 @@ namespace HC.Template.Infrastructure.Repositories.CryptoCurrency.Contracts
 {
     public interface ICryptoRepo // Add to Startup.cs for DI
     {
-        Task<CoinCapResponse> GetCoinCapData(CoinCapRequest coinCapRequest);
-        Task<CoinCapResponse> GetCoinCapDataLimit(CoinCapRequest coinCapRequest);
+        CoinCapResponse GetCoinCapData(CoinCapRequest coinCapRequest);
     }
 }

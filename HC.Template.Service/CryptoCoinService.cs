@@ -1,9 +1,7 @@
 ﻿using HC.Template.Infrastructure.Repositories.CryptoCurrency.Contracts;
 using HC.Template.Interface.Contracts;
 using HC.Template.Interface.ServiceModels.CryptoCurrency;
-using HC.Template.InternalServices.Mappers.Contracts;
-using System;
-using System.Threading.Tasks;
+using HC.Template.Service.InternalServices.Mappers.Contracts;
 
 namespace HC.Template.Service
 {
@@ -18,23 +16,13 @@ namespace HC.Template.Service
             _cryptoRepo = cryptoRepo;
         }
 
-        /// <summary>
-        /// Gets data from the external service provided by https://coinmarketcap.com/
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        public async Task<CryptoCoinResponse> GetCoinMarketCapByAll(CryptoCoinRequest request)
+        public CryptoCoinResponse GetCoinMarketCapByLimit(CryptoCoinRequest request)
         {
             var capCoinRequest = _mapper.MapCryptoCoinRequestToCoinCapRequest(request);
-            var response = await _cryptoRepo.GetCoinCapData(capCoinRequest);
+            var response = _cryptoRepo.GetCoinCapData(capCoinRequest);
             var result = _mapper.MapCoinCapResponseToCryptoCoinResponse(response);
 
             return result;
-        }
-
-        public async Task<CryptoCoinResponse> GetCoinMarketCapByLimit(CryptoCoinRequest request)
-        {
-            throw new NotImplementedException();
         }
     }
 }

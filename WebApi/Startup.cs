@@ -1,17 +1,18 @@
-﻿using HC.Template.Factories;
-using HC.Template.Factories.Contracts;
+﻿using HC.Template.Factories.Contracts;
 using HC.Template.Infrastructure.ConfigModels;
 using HC.Template.Infrastructure.Factories;
+using HC.Template.Infrastructure.Factories.Contracts;
 using HC.Template.Infrastructure.Logging;
 using HC.Template.Infrastructure.Logging.Contracts;
 using HC.Template.Infrastructure.Repositories.CryptoCurrency.Contracts;
 using HC.Template.Infrastructure.Repositories.CryptoCurrency.Repo;
 using HC.Template.Interface.Contracts;
-using HC.Template.InternalServices.ConfigurationService;
-using HC.Template.InternalServices.ConfigurationService.Contracts;
-using HC.Template.InternalServices.Mappers;
-using HC.Template.InternalServices.Mappers.Contracts;
 using HC.Template.Service;
+using HC.Template.Service.Factories;
+using HC.Template.Service.InternalServices.ConfigurationService;
+using HC.Template.Service.InternalServices.ConfigurationService.Contracts;
+using HC.Template.Service.InternalServices.Mappers;
+using HC.Template.Service.InternalServices.Mappers.Contracts;
 using HC.Template.WebApi.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -89,7 +90,7 @@ namespace WebApi
             services.AddTransient<ICryptoRepo, CryptoRepo>();
 
             // Singleton because Httpclient instance must be used and re-used according to industry standards.
-            services.AddSingleton<HttpClientFactory>();
+            services.AddSingleton<IHttpClientFactory>(new HttpClientFactory());
 
             // Dependency injection - 'Core' Services -------------------------------------------------------------------------
             services.AddTransient<IAppSettingsService, AppSettingsService>();

@@ -16,19 +16,20 @@ namespace HC.Template.WebApi.Controllers
             _crytpoCoinService = crytpoCoinService;
         }
 
-        [HttpGet]
-        [Route("GetCoinMarketCapAll")]
-        public async Task<CryptoCoinResponse> GetCoinMarketCapByAll(CryptoCoinRequest request)
-        {
-            var response = await _crytpoCoinService.GetCoinMarketCapByAll(request);
-            return response;
-        }
+        //[HttpGet]
+        //[Route("GetCoinMarketCapAll")]
+        //public async Task<CryptoCoinResponse> GetCoinMarketCapByAll(CryptoCoinRequest request)
+        //{
+        //    var response = await _crytpoCoinService.GetCoinMarketCapByAll(request);
+        //    return response;
+        //}
 
         [HttpGet]
         [Route("GetCoinMarketCapLimit")]
-        public async Task<CryptoCoinResponse> GetCoinMarketCapByLimit(CryptoCoinRequest request)
+        public CryptoCoinResponse GetCoinMarketCapByLimit(CryptoCoinRequest request)
         {
-            return new CryptoCoinResponse();
+            var response = _crytpoCoinService.GetCoinMarketCapByLimit(request);
+            return response;
         }
 
     }

@@ -1,11 +1,11 @@
 ﻿using HC.Template.Domain.Models.CryptoCurrency;
 using HC.Template.Interface.ServiceModels.CryptoCurrency;
-using HC.Template.InternalServices.Mappers.Contracts;
-using System.Collections.Generic;
+using HC.Template.Service.InternalServices.Mappers.Contracts;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace HC.Template.InternalServices.Mappers // Internal services are never meant to be exposed to an external consumer. Hence Internal services
+namespace HC.Template.Service.InternalServices.Mappers // Internal services are never meant to be exposed to an external consumer. Hence Internal services
 {
     public class CryptoCoinMapper : ICryptoCoinMapper
     {
@@ -13,7 +13,7 @@ namespace HC.Template.InternalServices.Mappers // Internal services are never me
         {
             var result = new CoinCapRequest()
             {
-                Convert = request.Convert,
+                Convert = "USD", // Default value //request.Convert,
                 Limit = request.Limit
             };
 
